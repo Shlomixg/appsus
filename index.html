@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link type="text/css" media="screen" rel="stylesheet" href="lib/hamburgers.min.css" />
+    <link type="text/css" media="screen" rel="stylesheet" href="css/main.css" />
+    <!-- <link rel="icon" href="img/logo.svg" type="image/svg"> -->
+    <title>Appsus</title>
+</head>
+
+<body>
+    <div class="app">
+        <div class="menu-opacity"></div>
+
+        <nav-bar></nav-bar>
+
+        <main class="flex align-items-center">
+            <router-view></router-view>
+        </main>
+
+        <footer-cmp></footer-cmp>
+
+    </div>
+
+    <!-- lib -->
+    <script src="lib/vue.js"></script>
+    <script src="lib/vue-router.js"></script>
+    <!-- scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
