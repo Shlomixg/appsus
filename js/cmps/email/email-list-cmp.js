@@ -8,8 +8,8 @@ export default {
     template: `
         <section class="email-list">
             <ul class="clean-list">
-                <li v-for="email in emails">
-                    <email-preview :email="email" @click="test"></email-preview>
+                <li v-for="email in emails" @click="selectEmail(email)">
+                    <email-preview :email="email" ></email-preview>
                 </li>
             </ul>
         </section>
@@ -20,8 +20,8 @@ export default {
         }
     },
     methods: {
-        test() {
-            console.log('email');
+        selectEmail(email) {
+            this.$emit('select-email', email);
         }
     }
 }

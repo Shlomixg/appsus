@@ -16,10 +16,9 @@ export default  {
     },
     template: `
         <section class="app-email container">
-            
             <email-filter></email-filter>
             <email-list :emails="emails" @select-email="selectEmail"></email-list>
-            <email-details></email-details>
+            <email-details :selected-email="selectedEmail" ></email-details>
             <email-status></email-status>
             <email-compose></email-compose>
         </section>
@@ -27,15 +26,19 @@ export default  {
     data() {
         return {
             emails: null,
+            selectedEmail: null
         }
     },
     created() {
         emailService.createEmails()
-            .then(emails => this.emails = emails);
+            .then(emails => {
+                this.emails = emails;
+                if (this.emails) this.selectedEmail = this.emails[0];
+            });
     },
     methods: {
         selectEmail(email) {
-            console.log('email', email);
+            this.selectedEmail = email;
         }
     }
 }

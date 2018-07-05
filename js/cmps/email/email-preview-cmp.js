@@ -1,7 +1,7 @@
 export default {
     props: ['email'],
     template: `
-        <section class="email-preview">
+        <section class="email-preview" >
             <div>
                 {{email.subject}}
                 <p>{{email.body}}</p>
@@ -12,4 +12,6 @@ export default {
 
         }
     },
+    methods: {
+    }
 }
