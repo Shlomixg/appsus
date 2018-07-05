@@ -1,15 +1,15 @@
-import { loadFromStorage, saveToStorage, makeid } from './utils-service.js';
+import { loadFromStorage, saveToStorage, makeId } from './utils-service.js';
 let keeps = [
   {
-    id: makeid(),
+    id: makeId(),
     cmps: [
       {
-        id: makeid(),
+        id: makeId(),
         type: 'keep-txt',
         data: 'Hello Ariel'
       },
       {
-        id: makeid(),
+        id: makeId(),
         type: 'keep-img',
         data: 'http://via.placeholder.com/350x150'
       }
@@ -18,15 +18,15 @@ let keeps = [
   },
 
   {
-    id: makeid(),
+    id: makeId(),
     cmps: [
       {
-        id: makeid(),
+        id: makeId(),
         type: 'keep-txt',
         data: 'My note'
       },
       {
-        id: makeid(),
+        id: makeId(),
         type: 'keep-img',
         data: 'http://via.placeholder.com/150x150'
       }

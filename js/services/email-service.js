@@ -73,7 +73,7 @@ export default {
     saveEmail
 }
 
-function addEmailsTest(emails) {
+function addEmailsTest() {
     emails.push(createEmail('My First Email!', 'This is my first email. Yay!', 'Sus@mail.com', 'Puki Ben-Yaron'));
     emails.push(createEmail('I\'m Back!', 'This is offical. I\'m Back.', 'Sus@yam.co.il', 'Baba Cohen'));
     emails.push(createEmail('Baba is here!', 'Hi Puki, baba is here after his injury. Come his my office to pay a visit', 'Sus@met.com', 'Muki Ben-David'));
