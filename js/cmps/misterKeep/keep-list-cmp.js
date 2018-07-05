@@ -1,23 +1,22 @@
-import KeepImg from './keep-img-cmp.js';
-import KeepTxt from './keep-txt-cmp.js';
-
+import KeepPreview from './keep-preview-cmp.js';
 export default {
   name: 'keep-list',
   props: ['keeps'],
   template: `
           <section class="keep-list">
-              <div v-for="keep in keeps"
-                   :key="keep.id"
-                   class="keep-items">
-
-                <component v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data"></component>
-              
-              </div>
+              <keep-preview 
+                  v-for="keep in keeps"
+                  :key="keep.id" 
+                  :keep="keep"
+                  @click.native="onKeepSelect(kepp.id)"></keep-preview>
           </section>
       `,
-
+  methods: {
+    onKeepSelect(keepId) {
+      this.$router.push(`/keep/${keepId}`);
+    }
+  },
   components: {
-    KeepImg,
-    KeepTxt
+    KeepPreview
   }
 };
