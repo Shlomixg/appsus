@@ -2,12 +2,12 @@
 
 // Save data to local storage
 export function saveToStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value))
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
 // Load data from local storage
 export function loadFromStorage(key) {
-    return JSON.parse(localStorage.getItem(key))
+  return JSON.parse(localStorage.getItem(key));
 }
 
 // Delete from local storage
