@@ -5,13 +5,17 @@ import KeepTxt from './keep-txt-cmp.js';
 export default {
   name: 'keep-details',
   template: `
-        <section class="keep-details">
-            Details 
-            <div class="wrapper" v-if="keep">
+        <section class="keep-details" v-if="keep">
+            <div class="header">
+                <h3>{{keep.title}}</h3>
+                <a class="btn btn-close" @click="$router.push({ path: '/keep' })">Close</a> 
+            </div>
+            
+            <article class="cmps-wrapper" >
                 
                 <component v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data"></component>
                 
-            </div>    
+            </article>    
             
             <div class="keep-controls flex align-items-center space-around">
                 <i class="far fa-image "></i>

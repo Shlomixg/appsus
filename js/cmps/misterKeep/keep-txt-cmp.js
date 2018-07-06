@@ -3,9 +3,9 @@ export default {
   props: ['data'],
   template: `
         <section class="keep-txt">
-           <p>
+           <div contenteditable="true">
                {{data}}
-           </p> 
+           </div> 
         </section>
     `
 };

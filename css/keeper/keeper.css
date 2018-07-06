@@ -3,13 +3,23 @@
 }
 
 .keep-details {
+  max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 3.7em - 50px);
   position: relative;
 }
-
+.keep-details .header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.keep-details .btn-close {
+  line-height: 35px;
+}
+.keep-details .cmps-wrapper {
+}
 .keep-controls {
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
   padding: 8px;
@@ -28,4 +38,57 @@
 
 .keep-controls i:hover {
   color: #1c1c1c;
+}
+
+.keep-txt {
+}
+.btn-edit {
+  float: right;
+  width: 35px;
+  border-radius: 50%;
+  line-height: 35px;
+}
+
+.keep-img {
+  padding: 8px 0;
+  display: flow-root;
+  position: relative;
+}
+.keep-img img {
+  max-width: 100%;
+}
+
+.keep-img > .edit:hover {
+  opacity: 1;
+}
+
+.keep-img .replace {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.keep-img form {
+  padding: 24px;
+  background: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-self: center;
+}
+
+.keep-img input {
+  height: 35px;
+  padding: 0 7px;
+  border: 1px solid #ddd;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.keep-img .input-container {
+  margin-right: 8px;
 }
