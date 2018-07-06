@@ -10,8 +10,8 @@ import keepDetails from './cmps/misterKeep/keep-details-cmp.js';
 export default [
   { path: '/', component: homePage },
   { path: '/about', component: aboutPage },
-  { path: '/email', component: misterEmail },
   { path: '/keep', component: misterKeeper },
   { path: '/keep/:keepId', component: keepDetails },
+  { path: '/email/:emailId?', component: misterEmail },
   { path: '*', redirect: '/' }
 ];
