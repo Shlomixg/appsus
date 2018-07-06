@@ -13,7 +13,7 @@ export default {
             
             <article class="cmps-wrapper" >
                 
-                <component v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data"></component>
+                <component class="keep-cmp" v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data"></component>
                 
             </article>    
             
