@@ -17,17 +17,29 @@ export default {
     },
     template: `
         <section class="app-email container">
-            <email-filter></email-filter>
-            <email-list :emails="emails" @select-email="selectEmail"></email-list>
+            <email-filter @doFilter="setFilter"></email-filter>
+            <email-list :emails="emailsToShow" @select-email="selectEmail"></email-list>
             <email-details :selected-email="selectedEmail" @delete-email="deleteEmail" ></email-details>
             <email-status></email-status>
             <email-compose></email-compose>
         </section>
     `,
+    computed: {
+        emailsToShow() {
+            if (!this.filterBy) return this.emails;
+            return this.emails.filter(email => 
+                (email.subject.toLowerCase().includes(this.filterBy.txt.toLowerCase()) ||
+                email.body.toLowerCase().includes(this.filterBy.txt.toLowerCase()) || 
+                email.senderName.toLowerCase().includes(this.filterBy.txt.toLowerCase()) ||
+                email.senderMail.toLowerCase().includes(this.filterBy.txt.toLowerCase()))
+            )
+        }
+    },
     data() {
         return {
             emails: null,
-            selectedEmail: null
+            selectedEmail: null,
+            filterBy: null
         }
     },
     created() {
@@ -55,6 +67,9 @@ export default {
                 })
                 .catch(err => console.error(err))
         },
+        setFilter(filter) {
+            this.filterBy = filter
+        }
     },
     watch: {
         '$route.params.emailId': function () {
