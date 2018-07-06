@@ -1,6 +1,7 @@
 import { getKeepById } from '../../services/keep-service.js';
 import KeepImg from './keep-img-cmp.js';
 import KeepTxt from './keep-txt-cmp.js';
+import KeepAudio from './keep-audio-cmp.js';
 
 export default {
   name: 'keep-details',
@@ -39,6 +40,7 @@ export default {
   },
   components: {
     KeepImg,
-    KeepTxt
+    KeepTxt,
+    KeepAudio
   }
 };

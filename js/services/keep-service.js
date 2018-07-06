@@ -13,6 +13,12 @@ let keeps = [
         id: makeId(),
         type: 'keep-img',
         data: 'http://via.placeholder.com/350x150'
+      },
+      {
+        id: makeId(),
+        type: 'keep-audio',
+        data:
+          'http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3'
       }
     ],
     isPinned: true
