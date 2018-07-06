@@ -8,9 +8,13 @@ export default {
     template: `
         <section class="email-list">
             <ul class="clean-list">
-                <li v-for="email in emails" @click="selectEmail(email)">
+                <router-link tag="li" 
+                             v-for="(email, idx) in emails"
+                             :key="email.id"
+                             :to="'/email/' + email.id"
+                             @click="$emit('select-email', email)" >
                     <email-preview :email="email" ></email-preview>
-                </li>
+                </router-link>
             </ul>
         </section>
     `,
@@ -20,8 +24,5 @@ export default {
         }
     },
     methods: {
-        selectEmail(email) {
-            this.$emit('select-email', email);
-        }
     }
 }
