@@ -8,7 +8,7 @@ export default {
                   v-for="keep in keeps"
                   :key="keep.id" 
                   :keep="keep"
-                  @click.native="onKeepSelect(kepp.id)"></keep-preview>
+                  @click.native="onKeepSelect(keep.id)"></keep-preview>
           </section>
       `,
   methods: {

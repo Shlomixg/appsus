@@ -40,3 +40,8 @@ let keeps = [
 export function getKeeps() {
   return Promise.resolve(keeps);
 }
+
+export function getKeepById(keepId) {
+  let keep = keeps.find(({ id }) => id === keepId);
+  return Promise.resolve(keep);
+}
