@@ -1,3 +1,5 @@
+import { makeId } from '../../services/utils-service.js';
+
 export default {
   name: 'keep-todo',
   props: ['data', 'id'],
@@ -13,6 +15,12 @@ export default {
                         <span contenteditable="true" ref="elTodo" @blur="onTodoChange(todo.id, idx)">{{todo.txt}}</span>
                     </div>
                     <i class="far fa-trash-alt" @click="deleteTodo(todo.id)"></i>
+                </li>
+                <li class="todo-item">
+                    <div class="new-todo" @click="newTodo">
+                        <i class="fas fa-plus" title="New Item"></i>
+                        New Item
+                    </div>
                 </li>                
             </ul>
 
@@ -39,6 +47,16 @@ export default {
     onTodoChange(todoId, idx) {
       let todo = this.todos.find(todo => todo.id === todoId);
       todo.txt = this.$refs.elTodo[idx].innerText;
+      this.$emit('data-changed', { id: this.id, data: this.todos });
+    },
+    newTodo() {
+      let todo = {
+        id: makeId(),
+        txt: 'What needs to be done',
+        isDone: false
+      };
+
+      this.todos.push(todo);
       this.$emit('data-changed', { id: this.id, data: this.todos });
     }
   }

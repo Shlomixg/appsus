@@ -115,7 +115,5 @@
 }
 
 .new-todo {
-  line-height: 2;
-}
-.new-todo > i {
+  cursor: pointer;
 }
