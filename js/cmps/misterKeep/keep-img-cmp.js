@@ -1,6 +1,6 @@
 export default {
   name: 'keep-img',
-  props: ['data'],
+  props: ['data', 'id'],
   template: `
           <section class="keep-img">
             <div class="btn btn-edit" @click="editImg"> 

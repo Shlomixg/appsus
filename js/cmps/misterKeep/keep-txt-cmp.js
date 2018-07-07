@@ -1,6 +1,6 @@
 export default {
   name: 'keep-txt',
-  props: ['data'],
+  props: ['data', 'id'],
   template: `
         <section class="keep-txt">
            <div contenteditable="true">

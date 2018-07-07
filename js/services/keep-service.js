@@ -51,3 +51,14 @@ export function getKeepById(keepId) {
   let keep = keeps.find(({ id }) => id === keepId);
   return Promise.resolve(keep);
 }
+
+export function saveKeep() {}
+
+export function createEmptyKeep() {
+  return {
+    id: makeId(),
+    title: '',
+    cmps: [],
+    isPinned: false
+  };
+}

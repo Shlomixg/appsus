@@ -8,6 +8,7 @@ export default {
           <div class="wrapper" v-if="keeps">
             <keep-list :keeps="keeps"></keep-list>    
           </div>
+          <button class="btn" @click="addNewKeep">New Keep</button>
         </section>
     `,
   data() {
@@ -19,6 +20,9 @@ export default {
     getKeeps().then(keeps => {
       this.keeps = keeps;
     });
+  },
+  methods: {
+    addNewKeep() {}
   },
   components: {
     KeepList

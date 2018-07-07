@@ -1,6 +1,6 @@
 export default {
   name: 'keep-audio',
-  props: ['data'],
+  props: ['data', 'id'],
   template: `
           <section class="keep-audio">
             <div class="btn btn-edit" @click="editAudio"> 

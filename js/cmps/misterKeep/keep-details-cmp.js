@@ -1,4 +1,4 @@
-import { getKeepById } from '../../services/keep-service.js';
+import { getKeepById, saveKeep } from '../../services/keep-service.js';
 import KeepImg from './keep-img-cmp.js';
 import KeepTxt from './keep-txt-cmp.js';
 import KeepAudio from './keep-audio-cmp.js';
@@ -14,7 +14,12 @@ export default {
             
             <article class="cmps-wrapper" >
                 
-                <component class="keep-cmp" v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data"></component>
+                <component class="keep-cmp" 
+                  v-for="cmp in cmps"
+                  :key="cmp.id"
+                  :is="cmp.type"
+                  :data="cmp.data",
+                  :id="cmp.id"></component>
                 
             </article>    
             
@@ -30,12 +35,14 @@ export default {
     `,
   data() {
     return {
-      keep: null
+      keep: null,
+      cmps: null
     };
   },
   created() {
     getKeepById(this.$route.params.keepId).then(keep => {
       this.keep = keep;
+      this.cmps = keep.cmps;
     });
   },
   components: {
