@@ -1,5 +1,8 @@
 import { loadFromStorage, saveToStorage, makeId } from './utils-service.js';
-let keeps = [
+
+const KEEP_KEY = 'misterKeep';
+
+let sampleKeeps = [
   {
     id: makeId(),
     title: 'Just another title',
@@ -42,17 +45,32 @@ let keeps = [
     isPinned: false
   }
 ];
+let keeps;
 
 export function getKeeps() {
+  // try loading keeps from storage
+  if (!keeps) keeps = loadFromStorage(KEEP_KEY);
+  // storge was empty create sample data
+  if (!keeps) {
+    keeps = JSON.parse(JSON.stringify(sampleKeeps));
+    saveToStorage(KEEP_KEY, keeps);
+  }
   return Promise.resolve(keeps);
 }
 
 export function getKeepById(keepId) {
-  let keep = keeps.find(({ id }) => id === keepId);
-  return Promise.resolve(keep);
+  return getKeeps().then(keeps => {
+    let keep = keeps.find(({ id }) => id === keepId);
+    return keep;
+  });
 }
 
-export function saveKeep(keep, keepId) {}
+export function saveKeep(newKeep, keepId) {
+  getKeepById(keepId).then(keep => {
+    keep = newKeep;
+    saveToStorage(KEEP_KEY, keeps);
+  });
+}
 
 export function createEmptyKeep() {
   return {

@@ -46,7 +46,7 @@ export default {
       // update data
       cmp.data = newData.data;
       // save
-      saveKeep(keep, keep.id);
+      saveKeep(this.keep, this.keep.id);
       console.log('newData', newData);
     }
   },

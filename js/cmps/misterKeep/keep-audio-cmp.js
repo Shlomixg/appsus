@@ -6,9 +6,7 @@ export default {
             <div class="btn btn-edit" @click="editAudio"> 
               <i class="fas fa-pencil-alt"></i>
             </div>
-            <audio controls ref="elAudio">
-                <source type="audio/mpeg" :src="url"/>
-            </audio> 
+            <audio controls :src="audioUrl"></audio> 
              
              <div class="replace" v-if="isFormOpen">
               <form @submit.prevent="replaceAudio">
@@ -23,7 +21,6 @@ export default {
 
   data() {
     return {
-      url: this.data,
       newUrl: this.data,
       isFormOpen: false
     };
@@ -34,10 +31,13 @@ export default {
       this.isFormOpen = true;
     },
     replaceAudio() {
-      this.url = this.newUrl;
-      this.$refs.elAudio.load();
-      console.log('this.$refs: ', this.$refs);
       this.isFormOpen = false;
+      this.$emit('data-changed', { id: this.id, data: this.newUrl });
+    }
+  },
+  computed: {
+    audioUrl() {
+      return this.data;
     }
   }
 };
