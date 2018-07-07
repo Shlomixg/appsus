@@ -1,4 +1,4 @@
-import { getKeeps } from '../services/keep-service.js';
+import { getKeeps, newKeep } from '../services/keep-service.js';
 import KeepList from '../cmps/misterKeep/keep-list-cmp.js';
 
 export default {
@@ -22,7 +22,11 @@ export default {
     });
   },
   methods: {
-    addNewKeep() {}
+    addNewKeep() {
+      newKeep().then(keepId => {
+        this.$router.push({ path: `/keep/${keepId}` });
+      });
+    }
   },
   components: {
     KeepList

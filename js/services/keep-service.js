@@ -72,11 +72,26 @@ export function saveKeep(newKeep, keepId) {
   });
 }
 
-export function createEmptyKeep() {
+export function newKeep() {
+  return getKeeps().then(keeps => {
+    let emptyKeep = createEmptyKeep();
+    keeps.unshift(emptyKeep);
+    saveToStorage(KEEP_KEY, keeps);
+    return emptyKeep.id;
+  });
+}
+
+function createEmptyKeep() {
   return {
     id: makeId(),
-    title: '',
-    cmps: [],
+    title: 'Title',
+    cmps: [
+      {
+        id: makeId(),
+        type: 'keep-txt',
+        data: 'Write somthing....'
+      }
+    ],
     isPinned: false
   };
 }
