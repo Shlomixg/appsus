@@ -1,13 +1,14 @@
+import KeepEdit from './keep-edit-cmp.js';
+
 export default {
   name: 'keep-audio',
   props: ['data', 'id'],
   template: `
           <section class="keep-audio">
-            <div class="btn btn-edit" @click="editAudio"> 
-              <i class="fas fa-pencil-alt"></i>
-            </div>
-            <audio controls :src="audioUrl"></audio> 
-             
+            <keep-edit :edit="editAudio" :deleteItem="deleteItem"></keep-edit>  
+            <div class="item">
+              <audio controls :src="audioUrl"></audio> 
+            </div> 
              <div class="replace" v-if="isFormOpen">
               <form @submit.prevent="replaceAudio">
                 <div class="input-container">  
@@ -33,11 +34,17 @@ export default {
     replaceAudio() {
       this.isFormOpen = false;
       this.$emit('data-changed', { id: this.id, data: this.newUrl });
+    },
+    deleteItem() {
+      this.$emit('delete-item', this.id);
     }
   },
   computed: {
     audioUrl() {
       return this.data;
     }
+  },
+  components: {
+    KeepEdit
   }
 };

@@ -1,7 +1,8 @@
 import {
   getKeepById,
   saveKeep,
-  craeteEmptyItem
+  craeteEmptyItem,
+  deleteItem
 } from '../../services/keep-service.js';
 import KeepImg from './keep-img-cmp.js';
 import KeepTxt from './keep-txt-cmp.js';
@@ -25,7 +26,8 @@ export default {
                   :is="cmp.type"
                   :data="cmp.data"
                   :id="cmp.id"
-                  @data-changed="onDataChange" ></component>
+                  @data-changed="onDataChange"
+                  @delete-item="onDeleteItem" ></component>
                 
             </article>    
             
@@ -88,6 +90,9 @@ export default {
     deleteKeep() {
       this.$emit('delete-keep', this.keep.id);
       this.$router.push({ path: '/keep' });
+    },
+    onDeleteItem(cmpId) {
+      deleteItem(this.keep.id, cmpId);
     }
   },
   created() {

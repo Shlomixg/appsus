@@ -1,13 +1,14 @@
+import KeepEdit from './keep-edit-cmp.js';
+
 export default {
   name: 'keep-img',
   props: ['data', 'id'],
   template: `
           <section class="keep-img">
-            <div class="btn btn-edit" @click="editImg"> 
-              <i class="fas fa-pencil-alt"></i>
-            </div>
-             <img :src="imgUrl">
-             
+            <keep-edit :edit="editImg" :deleteItem="deleteItem"></keep-edit>  
+              <div class="item"> 
+                <img :src="imgUrl">
+             </div>
              <div class="replace" v-if="isFormOpen">
               <form  enctype="multipart/form-data" @submit.prevent="replaceImg">
                 <div class="input-container">  
@@ -35,11 +36,17 @@ export default {
     replaceImg() {
       this.isFormOpen = false;
       this.$emit('data-changed', { id: this.id, data: this.newUrl });
+    },
+    deleteItem() {
+      this.$emit('delete-item', this.id);
     }
   },
   computed: {
     imgUrl() {
       return this.data;
     }
+  },
+  components: {
+    KeepEdit
   }
 };

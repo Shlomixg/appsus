@@ -123,6 +123,15 @@ export function craeteEmptyItem(type) {
   return item;
 }
 
+export function deleteItem(keepId, cmpId) {
+  getKeeps().then(keeps => {
+    let keep = keeps.find(keep => keep.id === keepId);
+    let idx = keep.cmps.findIndex(cmp => cmp.id === cmpId);
+
+    keep.cmps.splice(idx, 1);
+    saveKeep(keep, keepId);
+  });
+}
 function createEmptyKeep() {
   return {
     id: makeId(),
