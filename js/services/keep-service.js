@@ -25,7 +25,7 @@ let sampleKeeps = [
       },
       {
         id: makeId(),
-        type: 'todo-app',
+        type: 'keep-todo',
         data: [
           {
             id: makeId(),
@@ -35,7 +35,7 @@ let sampleKeeps = [
           {
             id: makeId(),
             txt: 'Watch WestWorld',
-            isDone: false
+            isDone: true
           }
         ]
       }

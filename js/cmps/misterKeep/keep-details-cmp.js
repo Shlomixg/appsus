@@ -2,7 +2,7 @@ import { getKeepById, saveKeep } from '../../services/keep-service.js';
 import KeepImg from './keep-img-cmp.js';
 import KeepTxt from './keep-txt-cmp.js';
 import KeepAudio from './keep-audio-cmp.js';
-import TodoApp from '../todo-app/todo-app-cmp.js';
+import keepTodo from './keep-todo-cmp.js';
 
 export default {
   name: 'keep-details',
@@ -21,7 +21,7 @@ export default {
                   :is="cmp.type"
                   :data="cmp.data"
                   :id="cmp.id"
-                  @data-changed="onDataChange"></component>
+                  @data-changed="onDataChange" ></component>
                 
             </article>    
             
@@ -63,6 +63,6 @@ export default {
     KeepImg,
     KeepTxt,
     KeepAudio,
-    TodoApp
+    keepTodo
   }
 };

@@ -96,3 +96,26 @@
 
 .keep-audio {
 }
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  line-height: 2;
+  justify-content: space-between;
+}
+.todo-item > i {
+  margin-right: 8px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.new-todo {
+  line-height: 2;
+}
+.new-todo > i {
+}
