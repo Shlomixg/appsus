@@ -1,4 +1,5 @@
 import KeepEdit from './keep-edit-cmp.js';
+import KeepForm from './keep-form-cmp.js';
 
 export default {
   name: 'keep-img',
@@ -9,16 +10,10 @@ export default {
               <div class="item"> 
                 <img :src="imgUrl">
              </div>
-             <div class="replace" v-if="isFormOpen">
-              <form  enctype="multipart/form-data" @submit.prevent="replaceImg">
-                <div class="input-container">  
-                  <input type="url" v-model="newUrl">
-                  <input type="file" name="image"/>
-                  <input name="img" id="imgData" type="hidden"/>
-                </div>
-                <button class="btn" type="submit">Update</button>
-              </form>
-             </div>
+             <keep-form 
+                :submit="replaceImg"
+                v-model="newUrl"
+                :isFormOpen="isFormOpen"></keep-form>
           </section>
       `,
 
@@ -30,6 +25,9 @@ export default {
   },
 
   methods: {
+    valueChanged() {
+      console.log(arguments);
+    },
     editImg() {
       this.isFormOpen = true;
     },
@@ -47,6 +45,7 @@ export default {
     }
   },
   components: {
-    KeepEdit
+    KeepEdit,
+    KeepForm
   }
 };
