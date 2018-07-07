@@ -1,8 +1,8 @@
 import emailService from '../../services/email-service.js';
 
 export default {
-    props: [],
-    template: `
+  props: [],
+  template: `
         <section class="email-compose">
             <form>
                 <label for="to">To</label>

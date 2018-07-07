@@ -1,19 +1,17 @@
 export default {
-  name: 'keep-img',
+  name: 'keep-audio',
   props: ['data', 'id'],
   template: `
-          <section class="keep-img">
-            <div class="btn btn-edit" @click="editImg"> 
+          <section class="keep-audio">
+            <div class="btn btn-edit" @click="editAudio"> 
               <i class="fas fa-pencil-alt"></i>
             </div>
-             <img :src="imgUrl">
+            <audio controls :src="audioUrl"></audio> 
              
              <div class="replace" v-if="isFormOpen">
-              <form  enctype="multipart/form-data" @submit.prevent="replaceImg">
+              <form @submit.prevent="replaceAudio">
                 <div class="input-container">  
                   <input type="url" v-model="newUrl">
-                  <input type="file" name="image"/>
-                  <input name="img" id="imgData" type="hidden"/>
                 </div>
                 <button class="btn" type="submit">Update</button>
               </form>
@@ -29,16 +27,16 @@ export default {
   },
 
   methods: {
-    editImg() {
+    editAudio() {
       this.isFormOpen = true;
     },
-    replaceImg() {
+    replaceAudio() {
       this.isFormOpen = false;
       this.$emit('data-changed', { id: this.id, data: this.newUrl });
     }
   },
   computed: {
-    imgUrl() {
+    audioUrl() {
       return this.data;
     }
   }

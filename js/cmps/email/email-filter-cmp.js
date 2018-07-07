@@ -1,5 +1,5 @@
 export default {
-    template: `
+  template: `
         <section class="email-filter">
             <div>
                 <input type="text" v-model="filterBy.txt" placeholder="Search" @input="filterEmails" />
@@ -45,4 +45,5 @@ export default {
             this.$emit('doFilter', this.filterBy);
         }
     }
-}
+  }
+};

@@ -16,12 +16,8 @@ export default {
             </router-link>
         </ul>
     `,
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-        
-    }
-}
+  data() {
+    return {};
+  },
+  methods: {}
+};
