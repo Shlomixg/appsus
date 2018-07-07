@@ -15,11 +15,12 @@ export default {
             <article class="cmps-wrapper" >
                 
                 <component class="keep-cmp" 
-                  v-for="cmp in cmps"
+                  v-for="cmp in keep.cmps"
                   :key="cmp.id"
                   :is="cmp.type"
-                  :data="cmp.data",
-                  :id="cmp.id"></component>
+                  :data="cmp.data"
+                  :id="cmp.id"
+                  @data-changed="onDataChange"></component>
                 
             </article>    
             
@@ -35,14 +36,23 @@ export default {
     `,
   data() {
     return {
-      keep: null,
-      cmps: null
+      keep: null
     };
+  },
+  methods: {
+    onDataChange(newData) {
+      // find cmp by id
+      let cmp = this.keep.cmps.find(({ id }) => id === newData.id);
+      // update data
+      cmp.data = newData.data;
+      // save
+      saveKeep(keep, keep.id);
+      console.log('newData', newData);
+    }
   },
   created() {
     getKeepById(this.$route.params.keepId).then(keep => {
       this.keep = keep;
-      this.cmps = keep.cmps;
     });
   },
   components: {

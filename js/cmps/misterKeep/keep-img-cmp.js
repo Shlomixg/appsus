@@ -6,7 +6,7 @@ export default {
             <div class="btn btn-edit" @click="editImg"> 
               <i class="fas fa-pencil-alt"></i>
             </div>
-             <img :src="url">
+             <img :src="imgUrl">
              
              <div class="replace" v-if="isFormOpen">
               <form  enctype="multipart/form-data" @submit.prevent="replaceImg">
@@ -23,7 +23,6 @@ export default {
 
   data() {
     return {
-      url: this.data,
       newUrl: this.data,
       isFormOpen: false
     };
@@ -34,8 +33,13 @@ export default {
       this.isFormOpen = true;
     },
     replaceImg() {
-      this.url = this.newUrl;
       this.isFormOpen = false;
+      this.$emit('data-changed', { id: this.id, data: this.newUrl });
+    }
+  },
+  computed: {
+    imgUrl() {
+      return this.data;
     }
   }
 };

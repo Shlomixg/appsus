@@ -52,7 +52,7 @@ export function getKeepById(keepId) {
   return Promise.resolve(keep);
 }
 
-export function saveKeep() {}
+export function saveKeep(keep, keepId) {}
 
 export function createEmptyKeep() {
   return {
