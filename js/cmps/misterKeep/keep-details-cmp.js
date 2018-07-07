@@ -8,7 +8,7 @@ export default {
   template: `
         <section class="keep-details" v-if="keep">
             <div class="header">
-                <h3>{{keep.title}}</h3>
+                <h3 contenteditable="true" ref="elTitle" v-html="keep.title" @blur="onTitleChange()"></h3>
                 <a class="btn btn-close" @click="$router.push({ path: '/keep' })">Close</a> 
             </div>
             
@@ -47,7 +47,10 @@ export default {
       cmp.data = newData.data;
       // save
       saveKeep(this.keep, this.keep.id);
-      console.log('newData', newData);
+    },
+    onTitleChange() {
+      this.keep.title = this.$refs.elTitle.innerText;
+      saveKeep(this.keep, this.keep.id);
     }
   },
   created() {
