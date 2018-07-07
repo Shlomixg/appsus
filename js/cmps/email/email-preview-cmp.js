@@ -1,8 +1,8 @@
 import { eventBus, DELETE_EMAIL } from '../../services/event-bus-service.js';
 
 export default {
-  props: ['email'],
-  template: `
+    props: ['email'],
+    template: `
         <section class="email-preview" >
             <div>
                 <button class="btn" @click.stop="deleteEmail" >Delete</button>
@@ -27,5 +27,4 @@ export default {
             eventBus.$emit(DELETE_EMAIL, this.email.id);
         }
     }
-  }
 };

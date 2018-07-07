@@ -1,5 +1,5 @@
 export default {
-  template: `
+    template: `
         <section class="email-filter">
             <div>
                 <input type="text" v-model="filterBy.txt" placeholder="Search" @input="filterEmails" />
@@ -37,13 +37,12 @@ export default {
     },
     computed: {
         sorting() {
-			return (this.filterBy.sortIsAsc) ? 'fas fa-sort-up' : 'fas fa-sort-down';
-		}
+            return (this.filterBy.sortIsAsc) ? 'fas fa-sort-up' : 'fas fa-sort-down';
+        }
     },
     methods: {
         filterEmails() {
             this.$emit('doFilter', this.filterBy);
         }
     }
-  }
 };
