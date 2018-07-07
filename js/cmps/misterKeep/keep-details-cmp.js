@@ -26,12 +26,14 @@ export default {
             </article>    
             
             <div class="keep-controls flex align-items-center space-around">
-                <i class="far fa-image "></i>
-                <i class="far fa-map "></i>
-                <i class="fas fa-microphone "></i>
-                <i class="far fa-trash-alt "></i>
-                <i class="fas fa-thumbtack "></i>
-                <i class="fas fa-palette "></i>
+                <i class="far fa-image" title="New Image Item"></i>
+                <i class="far fa-map" title="New Map item"></i>
+                <i class="fas fa-microphone" title="New Audio item"></i>
+                <i class="far fa-list-alt" title="New Todo list"></i>
+                <i class="far fa-file-alt" title="New Text item"></i>
+                <i class="far fa-trash-alt" title="Delete Keep"></i>
+                <i class="fas fa-thumbtack" title="Pin Keep"></i>
+                <i class="fas fa-palette" title="Change Background"></i>
             </div>
         </section>
     `,
