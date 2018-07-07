@@ -3,7 +3,7 @@ export default {
   props: ['data', 'id'],
   template: `
         <section class="keep-txt">
-           <div contenteditable="true" ref="elTxt" v-html="data" @blur="onTxtChange($event)">
+           <div contenteditable="true" ref="elTxt" v-html="data" @blur="onTxtChange()">
            </div> 
         </section>
     `,
