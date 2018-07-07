@@ -4,7 +4,7 @@ var EMAILS_KEY = 'emailApp';
 var emails = [];
 var emailFilter = 'All'
 
-function createEmails() {
+function loadEmails() {
     emails = utilsService.loadFromStorage(EMAILS_KEY);
     if (!emails || emails.length === 0) {
         emails = [];
@@ -13,15 +13,16 @@ function createEmails() {
     return Promise.resolve(emails);
 }
 
-function createEmail(subject, body, senderMail, senderName) {
+function createEmail(subject = '', body = '', senderMail = '', senderName = '') {
     return {
         id: utilsService.makeId(),
         subject,
         body,
         isRead: false,
-        sentAt: Date.now(),
+        sentAt: '',
         senderMail,
-        senderName
+        senderName,
+        to: 'tester@appsus.com'
     }
 }
 
@@ -47,16 +48,12 @@ function removeEmail(id) {
     });
 }
 
-// function saveEmail(email) {
-//     if (email.id) {
-//         var emailIdx = emails.findIndex(currEmail => currEmail.id === email.id);
-//         emails.splice(emailIdx, 1, email)
-//     } else {
-//         email.id = makeId();
-//         emails.unshift(email);
-//     }
-//     return Promise.resolve(email);
-// }
+function sendEmail(email) {
+    email.sentAt = moment();
+    emails.unshift(email);
+    saveToStorage(EMAILS_KEY, emails);
+    return Promise.resolve(email);
+}
 
 // function getPrevEmailId(emailId) {
 //     var emailIdx = emails.findIndex(currEmail => currEmail.id === emailId);
@@ -71,16 +68,28 @@ function removeEmail(id) {
 // }
 
 export default {
-    createEmails,
+    loadEmails,
+    createEmail,
+    sendEmail,
     getEmails,
     getEmailById,
     removeEmail,
-    // saveEmail
 }
 
 function addEmailsTest() {
-    emails.unshift(createEmail('My First Email!', 'This is my first email. Yay!', 'Sus@mail.com', 'Puki Ben-Yaron'));
-    emails.unshift(createEmail('I\'m Back!', 'This is offical. I\'m Back.', 'Sus@yam.co.il', 'Baba Cohen'));
-    emails.unshift(createEmail('Baba is here!', 'Hi Puki, baba is here after his injury. Come to his office to pay a visit', 'Sus@met.com', 'Muki Ben-David'));
+    var temp = createEmail('It\'s coming home!', 'Football is coming home', 'Sus@app.net.il', 'Dudi Rooney');
+    temp.isRead = true;
+    sendEmail(temp);
+    temp.sentAt = moment(temp.sentAt).add(-45, 'm');
+    sendEmail(createEmail('My First Email!', 'This is my first email. Yay!', 'Sus@mail.com', 'Puki Ben-Yaron'));
+    sendEmail(createEmail('I\'m Back!', 'This is offical. I\'m Back.', 'Sus@yam.co.il', 'Baba Cohen'));
+    sendEmail(createEmail('Baba is here!', 'Hi Puki, baba is here after his injury. Come to his office to pay a visit', 'Sus@met.com', 'Muki Ben-David'));
+    temp = createEmail('Does Vue is the best JS Framework?', 'Probably the best framework in the world.', 'Sus@straw.co.il', 'Anonimus Alcoholic');
+    sendEmail(temp);
+    temp.sentAt = moment(temp.sentAt).add(30, 'd');
     saveToStorage(EMAILS_KEY, emails);
+}
+
+function addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes*60000);
 }

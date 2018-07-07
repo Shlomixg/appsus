@@ -6,17 +6,15 @@ export default {
     },
     props: ['emails'],
     template: `
-        <section class="email-list">
-            <ul class="clean-list">
-                <router-link tag="li" 
-                             v-for="(email, idx) in emails"
-                             :key="email.id"
-                             :to="'/email/' + email.id"
-                             @click="$emit('select-email', email)" >
-                    <email-preview :email="email" ></email-preview>
-                </router-link>
-            </ul>
-        </section>
+        <ul class="clean-list email-list">
+            <router-link tag="li" 
+                            v-for="(email, idx) in emails"
+                            :key="email.id"
+                            :to="'/email/' + email.id"
+                            @click="$emit('select-email', email)" >
+                <email-preview :email="email" ></email-preview>
+            </router-link>
+        </ul>
     `,
     data() {
         return {

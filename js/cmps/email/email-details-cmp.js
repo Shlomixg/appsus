@@ -6,10 +6,17 @@ export default {
             <h1>
                 subject: {{selectedEmail.subject}}
             </h1>
+            <h4>Time: {{sentTime}}</h4>
+            <p>{{selectedEmail.body}}</p>
         </section>`,
     data() {
         return {
 
+        }
+    },
+    computed: {
+        sentTime() {
+            return moment(this.selectedEmail.sentAt).format('HH:mm:ss, DD/MM/YYYY')
         }
     },
     created() {

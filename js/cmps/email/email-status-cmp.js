@@ -1,12 +1,28 @@
-export default {
-    props: [],
-    template: `
-        <section class="email-status">
-            status
-        </section>`,
-    data() {
-        return {
+import bProggress from '../../../lib/bootstrap-vue/src/components/progress/progress.js';
 
-        }
+Vue.component('b-progress', bProggress);
+
+export default {
+    components: {
+        bProggress
     },
+    props: ['emails'],
+    template: `
+        <section class="email-status" v-show="emails">
+            <b-progress :value="counter" :max="max" show-progress animated></b-progress>
+        </section>`,
+    computed: {
+        counter() {
+            if (!this.emails) return;
+            let counter = 0;
+            this.emails.forEach(email => {
+                if (email.isRead) counter++;
+            });
+            return counter;
+        },
+        max() {
+            if (!this.emails) return;        
+            return this.emails.length;
+        }
+    }
 }
