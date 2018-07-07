@@ -22,6 +22,22 @@ let sampleKeeps = [
         type: 'keep-audio',
         data:
           'http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3'
+      },
+      {
+        id: makeId(),
+        type: 'todo-app',
+        data: [
+          {
+            id: makeId(),
+            txt: 'Buy new car',
+            isDone: false
+          },
+          {
+            id: makeId(),
+            txt: 'Watch WestWorld',
+            isDone: false
+          }
+        ]
       }
     ],
     isPinned: true

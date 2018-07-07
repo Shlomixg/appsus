@@ -2,6 +2,7 @@ import { getKeepById, saveKeep } from '../../services/keep-service.js';
 import KeepImg from './keep-img-cmp.js';
 import KeepTxt from './keep-txt-cmp.js';
 import KeepAudio from './keep-audio-cmp.js';
+import TodoApp from '../todo-app/todo-app-cmp.js';
 
 export default {
   name: 'keep-details',
@@ -61,6 +62,7 @@ export default {
   components: {
     KeepImg,
     KeepTxt,
-    KeepAudio
+    KeepAudio,
+    TodoApp
   }
 };
