@@ -34,11 +34,12 @@ export default {
                 <i class="far fa-image" title="New Image Item" @click="newItem('keep-img')"></i>
                 <i class="far fa-map" title="New Map item"></i>
                 <i class="fas fa-microphone" title="New Audio item"></i>
-                <i class="far fa-list-alt" title="New Todo list"></i>
+                <i class="far fa-list-alt" title="New Todo list" @click="newItem('keep-todo')"></i>
                 <i class="far fa-file-alt" title="New Text item" @click="newItem('keep-txt')"></i>
                 <i class="far fa-trash-alt" title="Delete Keep" @click="deleteKeep"></i>
                 <i class="fas fa-thumbtack" title="Pin Keep" @click="togglePin" :class="{pinned: keep.isPinned}"></i>
                 <i class="fas fa-palette" @click="changeBg = !changeBg" title="Change Background">
+
                   <div class="color-controls" :class="{hidden: !changeBg}">
                       <div class="color bg-white" @click.stop="changeBackground('bg-white')"></div>
                       <div class="color bg-green" @click.stop="changeBackground('bg-green')"></div>
@@ -46,6 +47,7 @@ export default {
                       <div class="color bg-light-red" @click.stop="changeBackground('bg-light-red')"></div>
                       <div class="color bg-red" @click.stop="changeBackground('bg-red')"></div>
                   </div>
+
                 </i>
             </div>
         </section>
@@ -72,6 +74,7 @@ export default {
     newItem(itemType) {
       let item = craeteEmptyItem(itemType);
       this.keep.cmps.push(item);
+      saveKeep(this.keep, this.keep.id);
     },
     togglePin() {
       this.keep.isPinned = !this.keep.isPinned;

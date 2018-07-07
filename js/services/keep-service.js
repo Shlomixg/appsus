@@ -109,6 +109,15 @@ export function craeteEmptyItem(type) {
     case 'keep-txt':
       item.data = 'Write Somthing';
       break;
+    case 'keep-todo':
+      item.data = [
+        {
+          id: makeId(),
+          txt: 'What needs to be done',
+          isDone: false
+        }
+      ];
+      break;
   }
 
   return item;
