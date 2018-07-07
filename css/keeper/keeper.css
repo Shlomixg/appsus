@@ -177,6 +177,11 @@
 .keep-edit {
   width: 35px;
   float: right;
+  opacity: 0.3;
+  transition: all 0.3s ease-in-out;
+}
+.keep-edit:hover {
+  opacity: 1;
 }
 .keep-edit i {
   width: 35px;
