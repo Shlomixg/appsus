@@ -9,6 +9,8 @@
   flex-direction: column;
   height: calc(100vh - 3.7em - 50px);
   position: relative;
+  padding: 16px;
+  color: #000;
 }
 .keep-details .header {
   display: flex;
@@ -27,6 +29,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  background-color: #fff;
 }
 .keep-controls i {
   cursor: pointer;
@@ -34,12 +37,15 @@
   transition: all 0.2s;
   font-size: 24px;
   line-height: 1.2;
+  position: relative;
 }
 
 .keep-controls i:hover {
   color: #1c1c1c;
 }
-
+.keep-controls i.pinned {
+  color: blue;
+}
 .keep-txt {
 }
 .btn-edit {
@@ -50,10 +56,15 @@
 }
 .keep-cmp {
   padding: 8px 0;
-  display: flow-root;
+  /* display: flow-root; */
   position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
 }
-
+.keep-cmp .item {
+  flex-grow: 1;
+}
 .keep-cmp > .edit:hover {
   opacity: 1;
 }
@@ -116,4 +127,89 @@
 
 .new-todo {
   cursor: pointer;
+}
+.color-controls {
+  position: absolute;
+  bottom: 40px;
+  left: -10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+.color-controls.hidden {
+  /* height: 0; */
+  opacity: 0;
+  visibility: hidden;
+}
+
+.color-controls .color {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.keep-details.bg-white,
+.color-controls .bg-white {
+  background-color: rgba(255, 255, 255, 1);
+}
+.keep-details.bg-green,
+.color-controls .bg-green {
+  background-color: rgba(132, 220, 198, 1);
+}
+.keep-details.bg-light-green,
+.color-controls .bg-light-green {
+  background-color: rgba(165, 255, 214, 1);
+}
+.keep-details.bg-light-red,
+.color-controls .bg-light-red {
+  background-color: rgba(255, 166, 158, 1);
+}
+.keep-details.bg-red,
+.color-controls .bg-red {
+  background-color: rgba(255, 104, 107, 1);
+}
+.keep-edit {
+  width: 35px;
+  float: right;
+  opacity: 0.3;
+  transition: all 0.3s ease-in-out;
+}
+.keep-edit:hover {
+  opacity: 1;
+}
+.keep-edit i {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  background-color: var(--main-div-color);
+  color: var(--main-txt-color);
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+  cursor: pointer;
+}
+.keep-edit i:hover {
+  color: var(--main-div-color);
+  /* border-color: var(--main-div-color); */
+  background-color: var(--main-txt-color);
+  box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.2);
+}
+.keep-edit i:nth-child(2) {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.keep-edit:hover i,
+.keep-edit i:hover + i {
+  visibility: visible;
+  opacity: 1;
 }

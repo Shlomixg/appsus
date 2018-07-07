@@ -1,11 +1,13 @@
 import { makeId } from '../../services/utils-service.js';
+import KeepEdit from './keep-edit-cmp.js';
 
 export default {
   name: 'keep-todo',
   props: ['data', 'id'],
   template: `
         <section class="keep-todo">
-            <ul class="todo-list">
+          <keep-edit :deleteItem="deleteItem"></keep-edit>  
+            <ul class="todo-list item">
                 <li v-for="(todo, idx) in todos" :key="todo.id" class="todo-item">
                     
                     <div class="txt">    
@@ -58,6 +60,12 @@ export default {
 
       this.todos.push(todo);
       this.$emit('data-changed', { id: this.id, data: this.todos });
+    },
+    deleteItem() {
+      this.$emit('delete-item', this.id);
     }
+  },
+  components: {
+    KeepEdit
   }
 };

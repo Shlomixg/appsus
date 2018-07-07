@@ -1,23 +1,19 @@
+import KeepEdit from './keep-edit-cmp.js';
+import KeepForm from './keep-form-cmp.js';
+
 export default {
   name: 'keep-img',
   props: ['data', 'id'],
   template: `
           <section class="keep-img">
-            <div class="btn btn-edit" @click="editImg"> 
-              <i class="fas fa-pencil-alt"></i>
-            </div>
-             <img :src="imgUrl">
-             
-             <div class="replace" v-if="isFormOpen">
-              <form  enctype="multipart/form-data" @submit.prevent="replaceImg">
-                <div class="input-container">  
-                  <input type="url" v-model="newUrl">
-                  <input type="file" name="image"/>
-                  <input name="img" id="imgData" type="hidden"/>
-                </div>
-                <button class="btn" type="submit">Update</button>
-              </form>
+            <keep-edit :edit="editImg" :deleteItem="deleteItem"></keep-edit>  
+              <div class="item"> 
+                <img :src="imgUrl">
              </div>
+             <keep-form 
+                :submit="replaceImg"
+                v-model="newUrl"
+                :isFormOpen="isFormOpen"></keep-form>
           </section>
       `,
 
@@ -29,17 +25,27 @@ export default {
   },
 
   methods: {
+    valueChanged() {
+      console.log(arguments);
+    },
     editImg() {
       this.isFormOpen = true;
     },
     replaceImg() {
       this.isFormOpen = false;
       this.$emit('data-changed', { id: this.id, data: this.newUrl });
+    },
+    deleteItem() {
+      this.$emit('delete-item', this.id);
     }
   },
   computed: {
     imgUrl() {
       return this.data;
     }
+  },
+  components: {
+    KeepEdit,
+    KeepForm
   }
 };

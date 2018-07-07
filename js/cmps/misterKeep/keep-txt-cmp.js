@@ -1,9 +1,16 @@
+import KeepEdit from './keep-edit-cmp.js';
+
 export default {
   name: 'keep-txt',
   props: ['data', 'id'],
   template: `
         <section class="keep-txt">
-           <div contenteditable="true" ref="elTxt" v-html="data" @blur="onTxtChange()">
+          <keep-edit :deleteItem="deleteItem"></keep-edit>  
+           <div contenteditable="true"
+                class="item"
+                ref="elTxt"
+                v-html="data"
+                @blur="onTxtChange()">
            </div> 
         </section>
     `,
@@ -13,6 +20,12 @@ export default {
 
       console.log(newData);
       this.$emit('data-changed', { id: this.id, data: newData });
+    },
+    deleteItem() {
+      this.$emit('delete-item', this.id);
     }
+  },
+  components: {
+    KeepEdit
   }
 };

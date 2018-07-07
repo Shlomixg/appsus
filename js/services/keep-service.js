@@ -6,6 +6,7 @@ let sampleKeeps = [
   {
     id: makeId(),
     title: 'Just another title',
+    backgroundColor: 'bg-white',
     cmps: [
       {
         id: makeId(),
@@ -46,6 +47,7 @@ let sampleKeeps = [
   {
     id: makeId(),
     title: 'Just another title title',
+    backgroundColor: 'bg-white',
     cmps: [
       {
         id: makeId(),
@@ -97,6 +99,39 @@ export function newKeep() {
   });
 }
 
+export function craeteEmptyItem(type) {
+  let item = {
+    id: makeId(),
+    type
+  };
+
+  switch (type) {
+    case 'keep-txt':
+      item.data = 'Write Somthing';
+      break;
+    case 'keep-todo':
+      item.data = [
+        {
+          id: makeId(),
+          txt: 'What needs to be done',
+          isDone: false
+        }
+      ];
+      break;
+  }
+
+  return item;
+}
+
+export function deleteItem(keepId, cmpId) {
+  getKeeps().then(keeps => {
+    let keep = keeps.find(keep => keep.id === keepId);
+    let idx = keep.cmps.findIndex(cmp => cmp.id === cmpId);
+
+    keep.cmps.splice(idx, 1);
+    saveKeep(keep, keepId);
+  });
+}
 function createEmptyKeep() {
   return {
     id: makeId(),
