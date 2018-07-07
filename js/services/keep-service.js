@@ -6,6 +6,7 @@ let sampleKeeps = [
   {
     id: makeId(),
     title: 'Just another title',
+    backgroundColor: 'bg-white',
     cmps: [
       {
         id: makeId(),
@@ -46,6 +47,7 @@ let sampleKeeps = [
   {
     id: makeId(),
     title: 'Just another title title',
+    backgroundColor: 'bg-white',
     cmps: [
       {
         id: makeId(),
@@ -95,6 +97,21 @@ export function newKeep() {
     saveToStorage(KEEP_KEY, keeps);
     return emptyKeep.id;
   });
+}
+
+export function craeteEmptyItem(type) {
+  let item = {
+    id: makeId(),
+    type
+  };
+
+  switch (type) {
+    case 'keep-txt':
+      item.data = 'Write Somthing';
+      break;
+  }
+
+  return item;
 }
 
 function createEmptyKeep() {
