@@ -43,6 +43,10 @@ export default {
   },
   computed: {
     keepsToShow() {
+      this.keeps.sort(keep1 => {
+        return !keep1.isPinned;
+      });
+
       if (this.keepFilter.length < 3) return this.keeps;
       return this.keeps.filter(keep => {
         let keepStr = JSON.stringify(keep).toLowerCase();

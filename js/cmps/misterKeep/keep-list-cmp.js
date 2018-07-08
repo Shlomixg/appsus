@@ -8,7 +8,7 @@ export default {
           <section class="keep-list">
           <masonry :cols="cols" :gutter="30">
               <keep-preview 
-                  v-for="keep in keepsToShow"
+                  v-for="keep in keeps"
                   :key="keep.id" 
                   :keep="keep"
                   @click.native="onKeepSelect(keep.id)"></keep-preview>
@@ -21,11 +21,6 @@ export default {
     }
   },
   computed: {
-    keepsToShow() {
-      return this.keeps.sort(keep1 => {
-        return !keep1.isPinned;
-      });
-    },
     cols() {
       if (this.isGrid) return 3;
       else return 1;
