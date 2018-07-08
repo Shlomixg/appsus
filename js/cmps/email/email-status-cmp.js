@@ -8,7 +8,7 @@ export default {
     },
     props: ['emails'],
     template: `
-        <section class="email-status" v-show="counter || max">
+        <section class="email-status" v-show="counter || emailsCount">
             <b-progress :value="counter" :max="emailsCount" show-progress animated></b-progress>
         </section>`,
     computed: {
