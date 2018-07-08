@@ -21,7 +21,7 @@ export default {
                         <h3 contenteditable="true" ref="elTitle" v-html="keep.title" @blur="onTitleChange()"></h3>
                         <a class="btn btn-close" @click="$router.push({ path: '/keep' })">Close</a>
                     </div>
-
+                  
                     <article class="cmps-wrapper" slot="body">
 
                         <component class="keep-cmp" v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data" :id="cmp.id" @data-changed="onDataChange"
