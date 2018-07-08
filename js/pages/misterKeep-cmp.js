@@ -1,5 +1,6 @@
-import { getKeeps, newKeep } from '../services/keep-service.js';
+import { getKeeps, newKeep, deleteKeep } from '../services/keep-service.js';
 import KeepList from '../cmps/misterKeep/keep-list-cmp.js';
+import eventBus, { DELETE_KEEP } from '../services/event-bus-service.js';
 
 export default {
   name: 'mister-keep',
@@ -26,12 +27,16 @@ export default {
     getKeeps().then(keeps => {
       this.keeps = keeps;
     });
+    eventBus.$on(DELETE_KEEP, this.deleteKeep);
   },
   methods: {
     addNewKeep() {
       newKeep().then(keepId => {
         this.$router.push({ path: `/keep/${keepId}/details` });
       });
+    },
+    deleteKeep(keepId) {
+      deleteKeep(keepId);
     }
   },
   components: {

@@ -2,8 +2,10 @@ import {
   getKeepById,
   saveKeep,
   craeteEmptyItem,
-  deleteItem
+  deleteItem,
+  deleteEmptyItems
 } from '../../services/keep-service.js';
+import eventBus, { DELETE_KEEP } from '../../services/event-bus-service.js';
 import KeepImg from './keep-img-cmp.js';
 import KeepTxt from './keep-txt-cmp.js';
 import KeepAudio from './keep-audio-cmp.js';
@@ -13,13 +15,13 @@ import VueModal from '../vue-modal/vue-modal-cmp.js';
 export default {
   name: 'keep-details',
   template: `
-              <vue-modal class="keep-details" v-if="keep">
+              <vue-modal class="keep-details" v-if="keep" >
                     <div class="header" slot="header">
                         <h3 contenteditable="true" ref="elTitle" v-html="keep.title" @blur="onTitleChange()"></h3>
                         <a class="btn btn-close" @click="$router.push({ path: '/keep' })" >Close</a>
                     </div>
                   
-                    <article class="cmps-wrapper" slot="body" ref="elDetailsBody">
+                    <article class="cmps-wrapper" slot="body" ref="elDetailsBody" :class="keep.backgroundColor">
 
                         <component class="keep-cmp" v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data" :id="cmp.id" @data-changed="onDataChange"
                             @delete-item="onDeleteItem"></component>
@@ -89,7 +91,7 @@ export default {
       saveKeep(this.keep, this.keep.id);
     },
     deleteKeep() {
-      this.$emit('delete-keep', this.keep.id);
+      eventBus.$emit(DELETE_KEEP, this.keep.id);
       this.$router.push({ path: '/keep' });
     },
     onDeleteItem(cmpId) {
@@ -100,6 +102,9 @@ export default {
     getKeepById(this.$route.params.keepId).then(keep => {
       this.keep = keep;
     });
+  },
+  beforeDestroy() {
+    deleteEmptyItems(this.keep.id);
   },
   components: {
     KeepImg,

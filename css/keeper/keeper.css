@@ -36,6 +36,14 @@
   break-inside: avoid;
   border: 1px solid var(--main-txt-color);
 }
+.keep-preview .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.keep-preview i.pinned {
+  color: blue;
+}
 .keep-details.modal-mask {
   display: flex;
   align-items: center;
@@ -60,6 +68,7 @@
 .keep-details .modal-body {
   max-height: 60vh;
   min-height: 60vh;
+  margin: 0;
 }
 
 .keep-details .cmps-wrapper {
@@ -217,24 +226,19 @@
   cursor: pointer;
 }
 
-.details-container.bg-white,
-.color-controls .bg-white {
+.bg-white {
   background-color: rgba(255, 255, 255, 1);
 }
-.details-container.bg-green,
-.color-controls .bg-green {
+.bg-green {
   background-color: rgba(132, 220, 198, 1);
 }
-.details-container.bg-light-green,
-.color-controls .bg-light-green {
+.bg-light-green {
   background-color: rgba(165, 255, 214, 1);
 }
-.details-container.bg-light-red,
-.color-controls .bg-light-red {
+.bg-light-red {
   background-color: rgba(255, 166, 158, 1);
 }
-.details-container.bg-red,
-.color-controls .bg-red {
+.bg-red {
   background-color: rgba(255, 104, 107, 1);
 }
 .keep-edit {

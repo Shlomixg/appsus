@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       imgUrl: this.data,
-      isFormOpen: !this.data
+      isFormOpen: !this.data && !this.preview
     };
   },
 

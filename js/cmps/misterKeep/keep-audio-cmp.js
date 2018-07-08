@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       audioUrl: this.data,
-      isFormOpen: !this.data
+      isFormOpen: !this.data && !this.preview
     };
   },
 
