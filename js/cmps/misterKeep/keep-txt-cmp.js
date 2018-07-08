@@ -2,10 +2,10 @@ import KeepEdit from './keep-edit-cmp.js';
 
 export default {
   name: 'keep-txt',
-  props: ['data', 'id'],
+  props: ['data', 'id', 'preview'],
   template: `
         <section class="keep-txt">
-          <keep-edit :deleteItem="deleteItem"></keep-edit>  
+          <keep-edit v-if="!preview" :deleteItem="deleteItem"></keep-edit>  
            <div contenteditable="true"
                 class="item"
                 ref="elTxt"
