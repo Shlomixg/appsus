@@ -24,6 +24,10 @@
 .mister-keep > .controls i:hover {
   box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.2);
 }
+.mister-keep > .controls input {
+  border: 1px solid var(--main-txt-color);
+  padding: 8px;
+}
 .keep-items {
   border: 1px solid red;
 }
@@ -35,6 +39,17 @@
   cursor: pointer;
   break-inside: avoid;
   border: 1px solid var(--main-txt-color);
+}
+.keep-preview .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.keep-preview .header i {
+  padding: 8px;
+}
+.keep-preview i.pinned {
+  color: blue;
 }
 .keep-details.modal-mask {
   display: flex;
@@ -50,18 +65,24 @@
   width: 100%;
   padding: 16px 0 0;
 }
-.keep-details .modal-container .modal-header,
-.keep-details .modal-container .modal-body {
+.keep-details .modal-container .modal-header {
   padding: 0 16px;
 }
 .keep-details .modal-header {
   border-bottom: 1px solid var(--main-txt-color);
 }
+.keep-details .cmps-wrapper,
 .keep-details .modal-body {
   max-height: 60vh;
   min-height: 60vh;
-  overflow-y: scroll;
+  margin: 0;
 }
+
+.keep-details .cmps-wrapper {
+  overflow-y: scroll;
+  padding: 0 16px;
+}
+
 .details-container {
   max-width: 600px;
   width: 100%;
@@ -212,24 +233,19 @@
   cursor: pointer;
 }
 
-.details-container.bg-white,
-.color-controls .bg-white {
+.bg-white {
   background-color: rgba(255, 255, 255, 1);
 }
-.details-container.bg-green,
-.color-controls .bg-green {
+.bg-green {
   background-color: rgba(132, 220, 198, 1);
 }
-.details-container.bg-light-green,
-.color-controls .bg-light-green {
+.bg-light-green {
   background-color: rgba(165, 255, 214, 1);
 }
-.details-container.bg-light-red,
-.color-controls .bg-light-red {
+.bg-light-red {
   background-color: rgba(255, 166, 158, 1);
 }
-.details-container.bg-red,
-.color-controls .bg-red {
+.bg-red {
   background-color: rgba(255, 104, 107, 1);
 }
 .keep-edit {
@@ -270,16 +286,4 @@
 .keep-edit i:hover + i {
   visibility: visible;
   opacity: 1;
-}
-
-@media (min-width: 768px) {
-  .mister-keep.grid .keep-list {
-    column-count: 2;
-  }
-}
-
-@media (min-width: 992px) {
-  .mister-keep.grid .keep-list {
-    column-count: 3;
-  }
 }

@@ -1,22 +1,25 @@
 export default {
   name: 'keep-form',
-  props: ['submit', 'value', 'isFormOpen'],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
+  props: ['submit', 'url'],
   template: `
-        <section class="keep-form" v-if="isFormOpen">
+        <section class="keep-form">
 
-            <form  enctype="multipart/form-data" @submit.prevent="submit">
+            <form ref="elForm" enctype="multipart/form-data" @submit.prevent="submit(newUrl)">
                 <div class="input-container">  
-                    <input type="url" :value="value" @change="$emit('change', $event.target.value)">
-                    <input type="file" name="image"/>
-                    <input name="img" id="imgData" type="hidden"/>
+                    <input type="url" v-model="newUrl">
                 </div>
                 <button class="btn" type="submit">Update</button>
             </form>
 
         </section>
-    `
+    `,
+  data() {
+    return {
+      newUrl: this.url
+    };
+  },
+  methods: {},
+  beforeDestroy() {
+    this.$refs.elForm.reset();
+  }
 };

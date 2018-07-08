@@ -1,4 +1,5 @@
 import KeepEdit from './keep-edit-cmp.js';
+import KeepForm from './keep-form-cmp.js';
 
 export default {
   name: 'keep-audio',
@@ -7,44 +8,38 @@ export default {
           <section class="keep-audio">
             <keep-edit v-if="!preview" :edit="editAudio" :deleteItem="deleteItem"></keep-edit>  
             <div class="item">
-              <audio controls :src="audioUrl"></audio> 
+              <audio controls :src="audioUrl" v-if="audioUrl"></audio> 
             </div> 
-             <div class="replace" v-if="isFormOpen">
-              <form @submit.prevent="replaceAudio">
-                <div class="input-container">  
-                  <input type="url" v-model="newUrl">
-                </div>
-                <button class="btn" type="submit">Update</button>
-              </form>
-             </div>
+              <keep-form 
+                  v-if="isFormOpen"
+                  :submit="replaceAudio"
+                  :url="audioUrl">
+              </keep-form>
+           </div>
           </section>
       `,
 
   data() {
     return {
-      newUrl: this.data,
-      isFormOpen: false
+      audioUrl: this.data,
+      isFormOpen: !this.data && !this.preview
     };
   },
 
   methods: {
     editAudio() {
-      this.isFormOpen = true;
+      this.isFormOpen = !this.isFormOpen;
     },
-    replaceAudio() {
+    replaceAudio(newUrl) {
       this.isFormOpen = false;
-      this.$emit('data-changed', { id: this.id, data: this.newUrl });
+      this.$emit('data-changed', { id: this.id, data: newUrl });
     },
     deleteItem() {
       this.$emit('delete-item', this.id);
     }
   },
-  computed: {
-    audioUrl() {
-      return this.data;
-    }
-  },
   components: {
-    KeepEdit
+    KeepEdit,
+    KeepForm
   }
 };

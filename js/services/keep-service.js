@@ -99,6 +99,14 @@ export function newKeep() {
   });
 }
 
+export function deleteKeep(keepId) {
+  getKeeps().then(keeps => {
+    let idx = keeps.findIndex(keep => keep.id === keepId);
+    keeps.splice(idx, 1);
+    saveToStorage(KEEP_KEY, keeps);
+  });
+}
+
 export function craeteEmptyItem(type) {
   let item = {
     id: makeId(),
@@ -129,6 +137,13 @@ export function deleteItem(keepId, cmpId) {
     let idx = keep.cmps.findIndex(cmp => cmp.id === cmpId);
 
     keep.cmps.splice(idx, 1);
+    saveKeep(keep, keepId);
+  });
+}
+export function deleteEmptyItems(keepId) {
+  getKeepById(keepId).then(keep => {
+    let cmps = keep.cmps.filter(cmp => cmp.data);
+    keep.cmps = cmps;
     saveKeep(keep, keepId);
   });
 }
