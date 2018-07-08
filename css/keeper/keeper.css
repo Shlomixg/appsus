@@ -287,3 +287,6 @@
   visibility: visible;
   opacity: 1;
 }
+audio {
+  width: 100%;
+}
