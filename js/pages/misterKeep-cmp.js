@@ -4,10 +4,10 @@ import KeepList from '../cmps/misterKeep/keep-list-cmp.js';
 export default {
   name: 'mister-keep',
   template: `
-        <section class="mister-keep container">
+        <section class="mister-keep container" :class="{grid: isGrid}">
           <div class="controls">
-            <i class="fas fa-grip-horizontal"></i>
-            <i class="fas fa-align-justify"></i>
+            <i class="fas fa-grip-horizontal" :class="{active: isGrid}" @click="isGrid = true"></i>
+            <i class="fas fa-align-justify" :class="{active: !isGrid}" @click="isGrid = false"></i>
             <button class="btn" @click="addNewKeep">New Keep</button>
           </div>
           <div class="wrapper" v-if="keeps">
@@ -18,7 +18,8 @@ export default {
     `,
   data() {
     return {
-      keeps: null
+      keeps: null,
+      isGrid: true
     };
   },
   created() {

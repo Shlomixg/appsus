@@ -1,4 +1,6 @@
 import KeepPreview from './keep-preview-cmp.js';
+import KeepDetails from './keep-details-cmp.js';
+
 export default {
   name: 'keep-list',
   props: ['keeps'],
@@ -13,10 +15,11 @@ export default {
       `,
   methods: {
     onKeepSelect(keepId) {
-      this.$router.replace(`/keep/${keepId}/details`);
+      this.$router.push(`/keep/${keepId}/details`);
     }
   },
   components: {
-    KeepPreview
+    KeepPreview,
+    KeepDetails
   }
 };

@@ -3,10 +3,10 @@ import KeepForm from './keep-form-cmp.js';
 
 export default {
   name: 'keep-img',
-  props: ['data', 'id'],
+  props: ['data', 'id', 'preview'],
   template: `
           <section class="keep-img">
-            <keep-edit :edit="editImg" :deleteItem="deleteItem"></keep-edit>  
+            <keep-edit v-if="!preview" :edit="editImg" :deleteItem="deleteItem"></keep-edit>  
               <div class="item"> 
                 <img :src="imgUrl">
              </div>

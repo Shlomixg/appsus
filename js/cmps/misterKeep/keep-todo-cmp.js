@@ -3,10 +3,10 @@ import KeepEdit from './keep-edit-cmp.js';
 
 export default {
   name: 'keep-todo',
-  props: ['data', 'id'],
+  props: ['data', 'id', 'preview'],
   template: `
         <section class="keep-todo">
-          <keep-edit :deleteItem="deleteItem"></keep-edit>  
+          <keep-edit v-if="!preview" :deleteItem="deleteItem"></keep-edit>  
             <ul class="todo-list item">
                 <li v-for="(todo, idx) in todos" :key="todo.id" class="todo-item">
                     
@@ -16,7 +16,7 @@ export default {
                             @click="toggleComplete(todo.id)"></i>    
                         <span contenteditable="true" ref="elTodo" @blur="onTodoChange(todo.id, idx)">{{todo.txt}}</span>
                     </div>
-                    <i class="far fa-trash-alt" @click="deleteTodo(todo.id)"></i>
+                    <i class="far fa-trash-alt" v-if="!preview" @click="deleteTodo(todo.id)"></i>
                 </li>
                 <li class="todo-item">
                     <div class="new-todo" @click="newTodo">

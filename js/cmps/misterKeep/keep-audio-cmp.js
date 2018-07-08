@@ -2,10 +2,10 @@ import KeepEdit from './keep-edit-cmp.js';
 
 export default {
   name: 'keep-audio',
-  props: ['data', 'id'],
+  props: ['data', 'id', 'preview'],
   template: `
           <section class="keep-audio">
-            <keep-edit :edit="editAudio" :deleteItem="deleteItem"></keep-edit>  
+            <keep-edit v-if="!preview" :edit="editAudio" :deleteItem="deleteItem"></keep-edit>  
             <div class="item">
               <audio controls :src="audioUrl"></audio> 
             </div> 

@@ -13,13 +13,10 @@ import VueModal from '../vue-modal/vue-modal-cmp.js';
 export default {
   name: 'keep-details',
   template: `
-        <!-- <section class="keep-details" v-if="keep"> -->
-            <!-- <div v-bar> -->
               <vue-modal class="keep-details" v-if="keep">
-                <!-- <div class="details-container" :class="keep.backgroundColor"> -->
                     <div class="header" slot="header">
                         <h3 contenteditable="true" ref="elTitle" v-html="keep.title" @blur="onTitleChange()"></h3>
-                        <a class="btn btn-close" @click="$router.push({ path: '/keep' })">Close</a>
+                        <a class="btn btn-close" @click="$router.push({ path: '/keep' })" >Close</a>
                     </div>
                   
                     <article class="cmps-wrapper" slot="body">
@@ -50,10 +47,7 @@ export default {
 
                         </i>
                     </div>
-                <!-- </div> -->
-            <!-- </div> -->
-            </vue-modal>
-        <!-- </section> -->
+          </vue-modal>
     `,
   data() {
     return {
