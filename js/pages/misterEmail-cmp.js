@@ -1,5 +1,5 @@
 import emailService from '../services/email-service.js';
-import { eventBus, DELETE_EMAIL } from '../services/event-bus-service.js';
+import { eventBus, DELETE_EMAIL, REPLY_EMAIL } from '../services/event-bus-service.js';
 
 import emailList from '../cmps/email/email-list-cmp.js';
 import emailDetails from '../cmps/email/email-details-cmp.js';
@@ -37,7 +37,7 @@ export default {
                             @return="deselectEmail" >
             </email-details>
             
-            <email-compose v-if="showModal" 
+            <email-compose ref="compose" v-show="showModal" 
                             :showModal="showModal"
                             @toggle-modal="toggleModal"  
                             @send-email="sendEmail" >
@@ -58,16 +58,19 @@ export default {
         emailService.loadEmails()
             .then(emails => {
                 this.emails = emails;
-                console.log('load emails:', this.emails);
             });
     },
     mounted() {
         eventBus.$on(DELETE_EMAIL, emailId => {
             this.deleteEmail(emailId);
-        })
+        });
+        eventBus.$on(REPLY_EMAIL, emailId => {
+            this.showModal = true;
+        });
     },
     destroyed() {
         eventBus.$off(DELETE_EMAIL);
+        eventBus.$off(REPLY_EMAIL);
     },
     methods: {
         selectEmail(email) {
@@ -103,7 +106,6 @@ export default {
     computed: {
         emailsToShow() {
             if (!this.filterBy) return this.emails;
-            console.log('Emails To Show');
             
             // Filtering
             var emailsFiltered = emailService.filterEmails(this.emails, emailsFiltered, this.filterBy);            

@@ -34,8 +34,6 @@ export default {
     </header>`,
 	methods: {
 		toggleMenu() {
-			console.log('test');
-			
 			(this.$refs.btnToggleMenu).classList.toggle('is-active');
 			(this.$refs.mainMenu).classList.toggle('open');
 

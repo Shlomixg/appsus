@@ -9,7 +9,6 @@ var emailsSortDefault = {
 
 function loadEmails() {
     emails = utilsService.loadFromStorage(EMAILS_KEY);
-    console.log('emails', emails);
     
     if (!emails || emails.length === 0) {
         emails = [];
@@ -96,10 +95,8 @@ function sortEmails(emailsToSort, filterBy) {
             });
             break;
     }
-    console.log('sortorder:', filterBy.sortIsAsc);
     
     if (!filterBy.sortIsAsc) emailsToSort.reverse();
-    console.log('sorted:', emailsToSort);
     
     return emailsToSort;
 }

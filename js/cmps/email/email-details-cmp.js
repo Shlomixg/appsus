@@ -1,3 +1,5 @@
+import { eventBus, REPLY_EMAIL } from '../../services/event-bus-service.js';
+
 export default {
     props: ['selected-email'],
     template: `
@@ -59,7 +61,7 @@ export default {
             this.selectedEmail.isRead = !this.selectedEmail.isRead;
         },
         replay() {
-            console.log('Bonus - later');
+            eventBus.$emit(REPLY_EMAIL, this.selectedEmail.id);
         },
         returnToList() {
             this.$router.push(`/email`);

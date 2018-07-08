@@ -1,4 +1,4 @@
-import { eventBus, DELETE_EMAIL } from '../../services/event-bus-service.js';
+import { eventBus, DELETE_EMAIL, REPLY_EMAIL } from '../../services/event-bus-service.js';
 
 export default {
     props: ['email'],
@@ -49,7 +49,7 @@ export default {
             this.email.isRead = !this.email.isRead;
         },
         replay() {
-            console.log('Bonus - later');
+            eventBus.$emit(REPLY_EMAIL, this.email.id);
         }
     }
 };

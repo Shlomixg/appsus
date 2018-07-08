@@ -1,4 +1,5 @@
 import emailService from '../../services/email-service.js';
+import { eventBus, REPLY_EMAIL } from '../../services/event-bus-service.js';
 
 export default {
     comopenets: {
@@ -15,9 +16,9 @@ export default {
                         </div>
                         <article class="modal-body">
                             <span class="flex column">
-                                <input type="text" id="to" v-model="newEmail.to" disabled />
-                                <input type="text" id="subject" v-model="newEmail.subject" placeholder="Subject" />
-                                <textarea v-model="newEmail.body" placeholder="Content" />
+                                <input ref="to" type="text" id="to" v-model="newEmail.to" disabled />
+                                <input ref="subject" type="text" id="subject" v-model="newEmail.subject" placeholder="Subject" />
+                                <textarea ref="content" v-model="newEmail.body" placeholder="Content" />
                             </span>
                         </article>
                         <div class="modal-footer">
@@ -30,13 +31,29 @@ export default {
     `,
     data() {
         return {
-            newEmail: emailService.createEmail()
+            newEmail: emailService.createEmail(),
+            subject: this.$refs.subject,
+            content: this.$refs.content
         }
+    },
+    mounted() {
+        eventBus.$on(REPLY_EMAIL, emailId => {
+            this.setReplyValues(emailId);
+        });
     },
     methods: {
         sendEmail() {
             this.$emit('send-email', this.newEmail);
             this.newEmail = emailService.createEmail();
+        },
+        setReplyValues(emailId) {
+            var self = this;
+            emailService.getEmailById(emailId)
+                .then(email => {
+                    self.newEmail.subject = `RE: ${email.subject}`;
+                    self.newEmail.body = `Quote: "${email.body}" \n`;
+                });
         }
     }
+
 }
