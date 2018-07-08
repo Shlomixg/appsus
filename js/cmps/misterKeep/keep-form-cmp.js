@@ -7,8 +7,6 @@ export default {
             <form ref="elForm" enctype="multipart/form-data" @submit.prevent="submit(newUrl)">
                 <div class="input-container">  
                     <input type="url" v-model="newUrl">
-                    <input type="file" name="image"/>
-                    <input name="img" id="imgData" type="hidden"/>
                 </div>
                 <button class="btn" type="submit">Update</button>
             </form>
@@ -20,6 +18,7 @@ export default {
       newUrl: this.url
     };
   },
+  methods: {},
   beforeDestroy() {
     this.$refs.elForm.reset();
   }

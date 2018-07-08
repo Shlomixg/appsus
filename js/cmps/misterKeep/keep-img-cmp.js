@@ -7,7 +7,7 @@ export default {
   template: `
           <section class="keep-img">
             <keep-edit v-if="!preview" :edit="editImg" :deleteItem="deleteItem"></keep-edit>  
-              <div class="item"> 
+              <div class="item" v-if="imgUrl"> 
                 <img :src="imgUrl">
              </div>
              <keep-form 

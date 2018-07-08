@@ -6,7 +6,7 @@ export default {
   template: `
         <section class="keep-txt">
           <keep-edit v-if="!preview" :deleteItem="deleteItem"></keep-edit>  
-           <div contenteditable="true"
+           <div :contenteditable="!preview"
                 class="item"
                 ref="elTxt"
                 v-html="data"

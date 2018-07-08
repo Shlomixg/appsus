@@ -7,12 +7,13 @@ export default {
   template: `
         <section class="mister-keep container" :class="{grid: isGrid}">
           <div class="controls">
+            <input type="search" v-model="keepFilter" placeholder="Search...">
             <i class="fas fa-grip-horizontal" :class="{active: isGrid}" @click="isGrid = true"></i>
             <i class="fas fa-align-justify" :class="{active: !isGrid}" @click="isGrid = false"></i>
             <button class="btn" @click="addNewKeep">New Keep</button>
           </div>
           <div class="wrapper" v-if="keeps">
-            <keep-list :keeps="keeps"></keep-list>    
+            <keep-list :keeps="keepsToShow" :isGrid="isGrid"></keep-list>    
           </div>
           <router-view :key="$route.fullPath"></router-view>
         </section>
@@ -20,7 +21,8 @@ export default {
   data() {
     return {
       keeps: null,
-      isGrid: true
+      isGrid: true,
+      keepFilter: ''
     };
   },
   created() {
@@ -37,6 +39,15 @@ export default {
     },
     deleteKeep(keepId) {
       deleteKeep(keepId);
+    }
+  },
+  computed: {
+    keepsToShow() {
+      if (this.keepFilter.length < 3) return this.keeps;
+      return this.keeps.filter(keep => {
+        let keepStr = JSON.stringify(keep).toLowerCase();
+        return keepStr.includes(this.keepFilter);
+      });
     }
   },
   components: {

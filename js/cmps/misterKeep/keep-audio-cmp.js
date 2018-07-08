@@ -8,7 +8,7 @@ export default {
           <section class="keep-audio">
             <keep-edit v-if="!preview" :edit="editAudio" :deleteItem="deleteItem"></keep-edit>  
             <div class="item">
-              <audio controls :src="audioUrl"></audio> 
+              <audio controls :src="audioUrl" v-if="audioUrl"></audio> 
             </div> 
               <keep-form 
                   v-if="isFormOpen"

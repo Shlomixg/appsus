@@ -24,6 +24,10 @@
 .mister-keep > .controls i:hover {
   box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.2);
 }
+.mister-keep > .controls input {
+  border: 1px solid var(--main-txt-color);
+  padding: 8px;
+}
 .keep-items {
   border: 1px solid red;
 }
@@ -40,6 +44,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.keep-preview .header i {
+  padding: 8px;
 }
 .keep-preview i.pinned {
   color: blue;
@@ -279,16 +286,4 @@
 .keep-edit i:hover + i {
   visibility: visible;
   opacity: 1;
-}
-
-@media (min-width: 768px) {
-  .mister-keep.grid .keep-list {
-    column-count: 2;
-  }
-}
-
-@media (min-width: 992px) {
-  .mister-keep.grid .keep-list {
-    column-count: 3;
-  }
 }
