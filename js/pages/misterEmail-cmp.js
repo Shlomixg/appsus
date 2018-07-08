@@ -37,13 +37,15 @@ export default {
                 this.emails = emails;
                 if (this.emails) this.selectedEmail = this.emails[0];
                 console.log(this.emails);
-                
             });
     },
     mounted() {
         eventBus.$on(DELETE_EMAIL, emailId => {
             this.deleteEmail(emailId);
         })
+    },
+    destroyed() {
+        eventBus.$off(DELETE_EMAIL);
     },
     methods: {
         selectEmail(email) {
@@ -73,9 +75,9 @@ export default {
     },
     computed: {
         emailsToShow() {
-            console.log('toshow');
-            
+            console.log('To Show');
             if (!this.filterBy) return this.emails;
+
             let emailsFiltered;
 
             // Filtering
@@ -109,8 +111,7 @@ export default {
                     });
                     break;
             }
-
-            if (this.filterBy.sortIsAsc) emailsFiltered.reverse();
+            if (!this.filterBy.sortIsAsc) emailsFiltered.reverse();
             return emailsFiltered;
         }
     },

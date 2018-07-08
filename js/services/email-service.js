@@ -38,6 +38,7 @@ function getEmailById(id) {
 function removeEmail(id) {
     return new Promise((resolve, reject) => {
         var emailIdx = emails.findIndex(email => email.id === id);
+        console.log('idx', emailIdx);
         if (emailIdx !== -1) {
             emails.splice(emailIdx, 1);
             saveToStorage(EMAILS_KEY, emails);
@@ -51,6 +52,9 @@ function removeEmail(id) {
 function sendEmail(email) {
     email.sentAt = moment();
     emails.unshift(email);
+    emails = emails.sort((a, b) => {
+        return a.sentAt - b.sentAt;
+    });
     saveToStorage(EMAILS_KEY, emails);
     return Promise.resolve(email);
 }
@@ -87,9 +91,8 @@ function addEmailsTest() {
     temp = createEmail('Does Vue is the best JS Framework?', 'Probably the best framework in the world.', 'Sus@straw.co.il', 'Anonimus Alcoholic');
     sendEmail(temp);
     temp.sentAt = moment(temp.sentAt).add(30, 'd');
+    emails = emails.sort((a, b) => {
+        return a.sentAt - b.sentAt;
+    });
     saveToStorage(EMAILS_KEY, emails);
-}
-
-function addMinutes(date, minutes) {
-    return new Date(date.getTime() + minutes*60000);
 }

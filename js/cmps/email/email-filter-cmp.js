@@ -19,7 +19,8 @@ export default {
                     <option value="subject">Subject</option>
                 </select>
                 <i :class="sorting"
-				    @click="filterBy.sortIsAsc = !filterBy.sortIsAsc"></i>
+                    :title="sortingTitle"
+				    @click="changeSortOrder"></i>
             </div>
         </section>
     `,
@@ -30,19 +31,24 @@ export default {
                 sortIsAsc: true,
                 txt: '',
                 emailStatus: '',
-                sortByDate: '',
-                sortByTitle: '',
             }
         }
     },
     computed: {
         sorting() {
-            return (this.filterBy.sortIsAsc) ? 'fas fa-sort-up' : 'fas fa-sort-down';
+            return (this.filterBy.sortIsAsc) ? 'fas fa-caret-up' : 'fas fa-caret-down';
+        },
+        sortingTitle() {
+            return (this.filterBy.sortIsAsc) ? 'Ascending' : 'Descending';
         }
     },
     methods: {
         filterEmails() {
             this.$emit('doFilter', this.filterBy);
+        },
+        changeSortOrder() {
+            this.filterBy.sortIsAsc = !this.filterBy.sortIsAsc;
+            this.filterEmails();
         }
     }
 };
