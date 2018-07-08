@@ -58,7 +58,7 @@ function sendEmail(email) {
     emails.unshift(email);
     emails = sortEmails(emails, emailsSortDefault);
     emails.reverse();
-    // saveToStorage(EMAILS_KEY, emails);
+    saveToStorage(EMAILS_KEY, emails);
     return Promise.resolve(email);
 }
 
