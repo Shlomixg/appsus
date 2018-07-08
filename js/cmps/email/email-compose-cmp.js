@@ -16,7 +16,7 @@ export default {
                         <article class="modal-body">
                             <span class="flex column">
                                 <input type="text" id="to" v-model="newEmail.to" disabled />
-                                <input type="text" id="subject" v-model="newEmail.subject" placeholder="To" />
+                                <input type="text" id="subject" v-model="newEmail.subject" placeholder="Subject" />
                                 <textarea v-model="newEmail.body" placeholder="Content" />
                             </span>
                         </article>

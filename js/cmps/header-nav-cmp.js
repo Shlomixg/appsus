@@ -18,22 +18,24 @@ export default {
 			-->
             <ul class="main-menu clean-list" ref="mainMenu">
                 <li>
-					<router-link exact to="/">Home</router-link>
+					<router-link exact to="/" @click.native="toggleMenu">Home</router-link>
                 </li>
                 <li>
-					<router-link to="/email">Email</router-link>
+					<router-link to="/email" @click.native="toggleMenu">Email</router-link>
 				</li>
 				<li>
-					<router-link to="/keep">Keeper</router-link>
+					<router-link to="/keep" @click.native="toggleMenu">Keeper</router-link>
 				</li>
 				<li>
-					<router-link to="/about">About</router-link>
+					<router-link to="/about" @click.native="toggleMenu">About</router-link>
                 </li>
             </ul>
         </nav>
     </header>`,
 	methods: {
 		toggleMenu() {
+			console.log('test');
+			
 			(this.$refs.btnToggleMenu).classList.toggle('is-active');
 			(this.$refs.mainMenu).classList.toggle('open');
 
