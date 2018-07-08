@@ -37,7 +37,7 @@ body {
 
 /* Header */
 
-header {
+.app > header {
   position: fixed;
   top: 0;
   width: 100%;

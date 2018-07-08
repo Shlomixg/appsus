@@ -86,9 +86,9 @@ function addEmailsTest() {
     sendEmail(temp);
     temp.sentAt = moment(temp.sentAt).add(-45, 'm');
     sendEmail(createEmail('My First Email!', 'This is my first email. Yay!', 'Sus@mail.com', 'Puki Ben-Yaron'));
-    sendEmail(createEmail('I\'m Back!', 'This is offical. I\'m Back.', 'Sus@yam.co.il', 'Baba Cohen'));
-    sendEmail(createEmail('Baba is here!', 'Hi Puki, baba is here after his injury. Come to his office to pay a visit', 'Sus@met.com', 'Muki Ben-David'));
-    temp = createEmail('Does Vue is the best JS Framework?', 'Probably the best framework in the world.', 'Sus@straw.co.il', 'Anonimus Alcoholic');
+    sendEmail(createEmail('I\'m Back!', 'This is offical.\nI\'m Back.', 'Sus@yam.co.il', 'Baba Cohen'));
+    sendEmail(createEmail('Baba is here!', 'Hi Puki,\nbaba is here after his injury.\nCome to his office to pay a visit', 'Sus@met.com', 'Muki Ben-David'));
+    temp = createEmail('Does Vue is the best JS Framework?', 'Probably the best framework in the world.\nFor sure.', 'Sus@straw.co.il', 'Horse');
     sendEmail(temp);
     temp.sentAt = moment(temp.sentAt).add(30, 'd');
     emails = emails.sort((a, b) => {

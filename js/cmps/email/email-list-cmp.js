@@ -6,12 +6,12 @@ export default {
     },
     props: ['emails'],
     template: `
-        <ul class="clean-list email-list">
+        <ul class="clean-list email-list flex column">
             <router-link tag="li" 
                             v-for="(email, idx) in emails"
                             :key="email.id"
                             :to="'/email/' + email.id"
-                            @click="$emit('select-email', email)" >
+                            @click="$emit('select-email', email)">
                 <email-preview :email="email" ></email-preview>
             </router-link>
         </ul>
