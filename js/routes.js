@@ -11,7 +11,11 @@ export default [
   { path: '/', component: homePage },
   { path: '/about', component: aboutPage },
   { path: '/keep', component: misterKeeper },
-  { path: '/keep/:keepId', component: keepDetails },
+  {
+    path: '/keep/:keepId',
+    component: misterKeeper,
+    children: [{ path: 'details', component: keepDetails }]
+  },
   { path: '/email/:emailId?', component: misterEmail },
   { path: '*', redirect: '/' }
 ];

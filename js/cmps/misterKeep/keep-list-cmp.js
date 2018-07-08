@@ -13,7 +13,7 @@ export default {
       `,
   methods: {
     onKeepSelect(keepId) {
-      this.$router.push(`/keep/${keepId}`);
+      this.$router.replace(`/keep/${keepId}/details`);
     }
   },
   components: {

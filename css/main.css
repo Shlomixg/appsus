@@ -1,6 +1,7 @@
 @import url('./helpers.css');
 @import url('./email/email.css');
 @import url('./keeper/keeper.css');
+@import url('./vue-modal.css');
 
 :root {
   --main-div-color: #35495e;
