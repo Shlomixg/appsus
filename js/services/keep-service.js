@@ -10,6 +10,12 @@ let sampleKeeps = [
     cmps: [
       {
         id: makeId(),
+        type: 'keep-audio',
+        data:
+          'http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3'
+      },
+      {
+        id: makeId(),
         type: 'keep-txt',
         data: 'Hello Ariel'
       },
@@ -18,12 +24,7 @@ let sampleKeeps = [
         type: 'keep-img',
         data: 'http://via.placeholder.com/350x150'
       },
-      {
-        id: makeId(),
-        type: 'keep-audio',
-        data:
-          'http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3'
-      },
+
       {
         id: makeId(),
         type: 'keep-todo',

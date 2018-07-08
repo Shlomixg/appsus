@@ -28,8 +28,10 @@ export default {
             </section>
         `,
   data() {
+    let cmps = this.keep.cmps.filter(cmp => cmp.type !== 'keep-audio');
+    cmps = cmps.slice(0, 2);
     return {
-      cmps: this.keep.cmps.slice(0, 2)
+      cmps
     };
   },
   methods: {
