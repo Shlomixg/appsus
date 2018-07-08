@@ -1,15 +1,15 @@
 import { getKeeps, newKeep, deleteKeep } from '../services/keep-service.js';
 import KeepList from '../cmps/misterKeep/keep-list-cmp.js';
 import eventBus, { DELETE_KEEP } from '../services/event-bus-service.js';
-
+import { isMobileDevice } from '../services/utils-service.js';
 export default {
   name: 'mister-keep',
   template: `
         <section class="mister-keep container" :class="{grid: isGrid}">
           <div class="controls">
             <input type="search" v-model="keepFilter" placeholder="Search...">
-            <i class="fas fa-grip-horizontal" :class="{active: isGrid}" @click="isGrid = true"></i>
-            <i class="fas fa-align-justify" :class="{active: !isGrid}" @click="isGrid = false"></i>
+            <i class="fas fa-grip-horizontal" v-if="!isMobile" :class="{active: isGrid}" @click="isGrid = true"></i>
+            <i class="fas fa-align-justify" v-if="!isMobile" :class="{active: !isGrid}" @click="isGrid = false"></i>
             <button class="btn" @click="addNewKeep">New Keep</button>
           </div>
           <div class="wrapper" v-if="keeps">
@@ -30,6 +30,7 @@ export default {
       this.keeps = keeps;
     });
     eventBus.$on(DELETE_KEEP, this.deleteKeep);
+    if (isMobileDevice()) this.isGrid = false;
   },
   methods: {
     addNewKeep() {
@@ -52,6 +53,9 @@ export default {
         let keepStr = JSON.stringify(keep).toLowerCase();
         return keepStr.includes(this.keepFilter);
       });
+    },
+    isMobile() {
+      return isMobileDevice();
     }
   },
   components: {

@@ -22,6 +22,7 @@ export default {
   },
   computed: {
     cols() {
+      let width = window.innerWidth;
       if (this.isGrid) return 3;
       else return 1;
     }
