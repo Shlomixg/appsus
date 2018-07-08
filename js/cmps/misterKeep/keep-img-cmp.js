@@ -11,16 +11,17 @@ export default {
                 <img :src="imgUrl">
              </div>
              <keep-form 
+                v-if="isFormOpen"
                 :submit="replaceImg"
-                v-model="newUrl"
-                :isFormOpen="isFormOpen"></keep-form>
+                :url="imgUrl"
+                ></keep-form>
           </section>
       `,
 
   data() {
     return {
-      newUrl: this.data,
-      isFormOpen: false
+      imgUrl: this.data,
+      isFormOpen: !this.data
     };
   },
 
@@ -29,19 +30,14 @@ export default {
       console.log(arguments);
     },
     editImg() {
-      this.isFormOpen = true;
+      this.isFormOpen = !this.isFormOpen;
     },
-    replaceImg() {
+    replaceImg(newUrl) {
       this.isFormOpen = false;
-      this.$emit('data-changed', { id: this.id, data: this.newUrl });
+      this.$emit('data-changed', { id: this.id, data: newUrl });
     },
     deleteItem() {
       this.$emit('delete-item', this.id);
-    }
-  },
-  computed: {
-    imgUrl() {
-      return this.data;
     }
   },
   components: {

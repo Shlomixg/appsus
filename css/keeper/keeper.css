@@ -50,18 +50,23 @@
   width: 100%;
   padding: 16px 0 0;
 }
-.keep-details .modal-container .modal-header,
-.keep-details .modal-container .modal-body {
+.keep-details .modal-container .modal-header {
   padding: 0 16px;
 }
 .keep-details .modal-header {
   border-bottom: 1px solid var(--main-txt-color);
 }
+.keep-details .cmps-wrapper,
 .keep-details .modal-body {
   max-height: 60vh;
   min-height: 60vh;
-  overflow-y: scroll;
 }
+
+.keep-details .cmps-wrapper {
+  overflow-y: scroll;
+  padding: 0 16px;
+}
+
 .details-container {
   max-width: 600px;
   width: 100%;

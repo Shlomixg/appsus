@@ -19,7 +19,7 @@ export default {
                         <a class="btn btn-close" @click="$router.push({ path: '/keep' })" >Close</a>
                     </div>
                   
-                    <article class="cmps-wrapper" slot="body">
+                    <article class="cmps-wrapper" slot="body" ref="elDetailsBody">
 
                         <component class="keep-cmp" v-for="cmp in keep.cmps" :key="cmp.id" :is="cmp.type" :data="cmp.data" :id="cmp.id" @data-changed="onDataChange"
                             @delete-item="onDeleteItem"></component>
@@ -30,7 +30,7 @@ export default {
                     <div class="keep-controls flex align-items-center space-around" slot="footer">
                         <i class="far fa-image" title="New Image Item" @click="newItem('keep-img')"></i>
                         <i class="far fa-map" title="New Map item"></i>
-                        <i class="fas fa-microphone" title="New Audio item"></i>
+                        <i class="fas fa-microphone" title="New Audio item" @click="newItem('keep-audio')"></i>
                         <i class="far fa-list-alt" title="New Todo list" @click="newItem('keep-todo')"></i>
                         <i class="far fa-file-alt" title="New Text item" @click="newItem('keep-txt')"></i>
                         <i class="far fa-trash-alt" title="Delete Keep" @click="deleteKeep"></i>
@@ -72,6 +72,12 @@ export default {
       let item = craeteEmptyItem(itemType);
       this.keep.cmps.push(item);
       saveKeep(this.keep, this.keep.id);
+
+      let h = this.$refs.elDetailsBody.scrollHeight;
+      this.$refs.elDetailsBody.scrollTo({
+        top: h,
+        behavior: 'smooth'
+      });
     },
     togglePin() {
       this.keep.isPinned = !this.keep.isPinned;
