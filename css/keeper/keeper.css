@@ -1,6 +1,25 @@
 .mister-keep {
   width: 100%;
 }
+.mister-keep > .controls {
+  display: flex;
+  justify-content: flex-end;
+}
+.mister-keep > .controls i {
+  height: 35px;
+  width: 35px;
+  background-color: var(--main-div-color);
+  line-height: 35px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.mister-keep > .controls i:hover {
+  color: var(--main-div-color);
+  /* border-color: var(--main-div-color); */
+  background-color: var(--main-txt-color);
+  box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.2);
+}
 .keep-items {
   border: 1px solid red;
 }
@@ -33,6 +52,7 @@
 }
 .keep-details .modal-body {
   max-height: 60vh;
+  min-height: 60vh;
   overflow-y: scroll;
 }
 .details-container {
