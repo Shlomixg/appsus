@@ -1,0 +1,78 @@
+/* Email List & Email Preview */
+
+/* Email List */
+
+.email-app .email-list-wrapper {
+    margin: 5px;
+    flex: 1 1 auto;
+}
+.email-list {
+    /* overflow-y: scroll;
+    max-height: 100%; */
+}
+
+.email-list li {
+    width: 100%;
+    border-bottom: 2px solid #ccc;
+}
+
+/* Email Preview  */
+
+.email-preview {
+    cursor: pointer;
+    max-width: 100%;
+    padding: 10px;
+    transition: all 0.2s linear;
+}
+
+.email-preview:hover {
+    background: #ddd
+}
+
+.email-preview span {
+    margin: 0 1px;
+}
+
+.email-preview span.email-sender {
+    flex: 0 0 125px;
+    /* text-overflow: ellipsis;    
+    overflow: hidden; */
+    /* white-space: nowrap; */
+}
+
+.email-preview span.email-content {
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    white-space: nowrap;
+    color: black;
+    /* display: block; */
+}
+
+.email-preview span.email-body {
+    color: #999;
+}
+
+.email-preview.bold-weight {
+    font-weight: 600;
+}
+.email-preview.light-weight {
+    font-weight: 300;
+}
+/* Controls */
+
+.email-preview-controls {
+    display: block;
+}
+
+.email-preview-controls i {
+    margin: 0 3px;
+    font-size: 16px;
+    /* line-height: 1.2; */
+    color: #737373;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+
+.email-preview-controls i:hover {
+    color: #1c1c1c;
+}

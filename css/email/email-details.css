@@ -1,0 +1,53 @@
+/* Email Details */
+
+.email-details {
+    width: 100%;
+    margin: 5px;
+}
+
+/* Controls */
+.email-controls {
+    width: 100%;
+    padding: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.email-controls i {
+    position: relative;
+    color: #737373;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1.2;
+    transition: all 0.2s;
+}
+
+.email-controls i:hover {
+    color: #1c1c1c;
+}
+
+/* Email Header */
+.email-details .email-data {
+    flex-wrap: wrap;
+    border-bottom: 2px solid #ccc;
+}
+.email-details h1.email-subject {
+    margin: 15px 0;
+    font-size: 2em;
+}
+
+.email-details .email-sender-name {
+    font-weight: 600;
+}
+
+.email-details .email-sender-mail {
+    font-weight: 300;
+}
+
+.email-details .email-addressee {
+    padding-bottom: 4px;
+}
+
+.email-details .email-body p {
+    line-height: 1.25;
+    white-space: pre;
+}

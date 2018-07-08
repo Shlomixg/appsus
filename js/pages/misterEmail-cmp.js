@@ -16,12 +16,14 @@ export default {
         emailFilter
     },
     template: `
-        <section class="app-email container">
-            <email-filter @doFilter="setFilter"></email-filter>
-            <email-list :emails="emailsToShow" @select-email="selectEmail"></email-list>
-            <email-details :selected-email="selectedEmail" @delete-email="deleteEmail" ></email-details>
-            <email-status :emails="emailsToShow"></email-status>
-            <email-compose @send-email="sendEmail" ></email-compose>
+        <section class="email-app container flex" >
+            <section class="email-list-wrapper" v-if="!selectedEmail">
+                <email-status :emails="emailsToShow"></email-status>
+                <email-filter @doFilter="setFilter"></email-filter>
+                <email-list :emails="emailsToShow" @select-email="selectEmail"></email-list>
+            </section>
+            <email-details v-if="selectedEmail" :selected-email="selectedEmail" @delete-email="deleteEmail" @return="deselectEmail" ></email-details>
+            <!-- <email-compose @send-email="sendEmail" ></email-compose> -->
         </section>
     `,
     data() {
@@ -35,7 +37,6 @@ export default {
         emailService.loadEmails()
             .then(emails => {
                 this.emails = emails;
-                if (this.emails) this.selectedEmail = this.emails[0];
                 console.log(this.emails);
             });
     },
@@ -51,12 +52,13 @@ export default {
         selectEmail(email) {
             this.selectedEmail = email;
         },
+        deselectEmail() {
+            this.selectedEmail = null;
+        },
         deleteEmail(emailId) {
             emailService.removeEmail(emailId)
                 .then(() => {
-                    this.selectedEmail = this.emails[0];
-                    if (this.selectedEmail) this.$router.push(`/email/${this.selectedEmail.id}`);
-                    else this.$router.push(`/email`);
+                    this.$router.push(`/email`);
                 })
                 .catch(err => console.error(err))
         },

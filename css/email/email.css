@@ -1,8 +1,11 @@
-.email-list li {
-    border-bottom: 1px solid #195da6;
-    margin: 5px;
+@import url('./email-list.css');
+@import url('./email-details.css');
+
+.email-app {
+    width: 100%;
 }
 
+/* Status (Proggress Bar) */
 /* Bootstrap4 cherry-picking */
 
 .progress {
