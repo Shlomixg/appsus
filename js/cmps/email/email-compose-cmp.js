@@ -2,8 +2,6 @@ import emailService from '../../services/email-service.js';
 import { eventBus, REPLY_EMAIL } from '../../services/event-bus-service.js';
 
 export default {
-    comopenets: {
-    },
     props: ['showModal'],
     template: `
         <transition name="modal">
@@ -55,5 +53,4 @@ export default {
                 });
         }
     }
-
 }

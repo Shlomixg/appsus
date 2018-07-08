@@ -3,7 +3,7 @@ import { eventBus, DELETE_EMAIL, REPLY_EMAIL } from '../../services/event-bus-se
 export default {
     props: ['email'],
     template: `
-        <section :class="tobold" 
+        <section :class="getWeight" 
                 class="email-preview flex align-items-center" 
                 @mouseover="showControls = true" 
                 @mouseleave="showControls = false">
@@ -36,7 +36,7 @@ export default {
             if (this.email.isRead) return 'Mark as unread';
             else return 'Mark as read';
         },
-        tobold() {
+        getWeight() {
             if (!this.email.isRead) return 'bold-weight';
             else return 'light-weight';
         }

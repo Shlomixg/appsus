@@ -47,10 +47,3 @@
     background-color: var(--main-txt-color);
     transition: width .6s ease;
 }
-
-/* .progress-bar::after {
-    content: "%";
-    padding: 0;
-    margin: 0;
-    display: inline;
-} */

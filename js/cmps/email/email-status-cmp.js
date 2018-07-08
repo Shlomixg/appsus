@@ -9,7 +9,7 @@ export default {
     props: ['emails'],
     template: `
         <section class="email-status" v-show="counter || max">
-            <b-progress :value="counter" :max="max" show-progress animated></b-progress>
+            <b-progress :value="counter" :max="emailsCount" show-progress animated></b-progress>
         </section>`,
     computed: {
         counter() {
@@ -20,7 +20,7 @@ export default {
             });
             return counter;
         },
-        max() {
+        emailsCount() {
             if (!this.emails) return;        
             return this.emails.length;
         }

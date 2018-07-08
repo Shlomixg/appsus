@@ -63,7 +63,7 @@
 /* Controls */
 
 .email-preview-controls {
-    display: block;
+    justify-content: flex-end;
     min-width: 100px;
     text-align: right;
 }

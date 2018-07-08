@@ -188,8 +188,6 @@ header ul.main-menu a:hover {
 main {
   width: 100%;
   flex: 1 0 auto;
-  flex-direction: column;
-  flex-wrap: wrap;
   padding: 4em 5px 10px;
   color: var(--main-txt-color);
   transition: color 0.3s ease-in-out;
