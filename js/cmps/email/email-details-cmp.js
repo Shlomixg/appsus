@@ -38,6 +38,9 @@ export default {
 
         }
     },
+    created() {
+        this.$emit('mark-read', this.selectedEmail);
+    },
     computed: {
         sentTime() {
             return moment(this.selectedEmail.sentAt).format('DD/MM/YYYY, HH:mm:ss')

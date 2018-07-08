@@ -1,0 +1,50 @@
+/* Email compose modal */
+.modal-container.email-compose {
+    width: 90%;
+    max-width: 1440px;
+    padding: 0;
+}
+
+.email-compose .modal-header {
+    background: var(--main-div-color);
+    padding: 5px;
+    color: var(--main-txt-color);
+}
+
+.email-compose i {
+    cursor: pointer;
+    font-size: 30px;
+    color: #aaa;
+    transition: all 0.3s linear;
+}
+.modal-container.email-compose i:hover {
+    color: #fff;
+}
+
+.email-compose .modal-body {
+    margin: 0;
+}
+
+.email-compose input,
+.email-compose textarea {
+    padding: 3px;
+    font-size: 20px;
+    border: 0;
+    border-bottom: 2px solid #ccc;
+}
+
+.email-compose textarea {
+    width: 100%;
+    height: 200px;
+    resize: vertical;
+}
+
+.email-compose input:focus,
+.email-compose textarea:focus {
+    outline: none;
+}
+
+.email-compose .modal-footer {
+    padding: 10px;
+    text-align: right;
+}

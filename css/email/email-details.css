@@ -2,27 +2,28 @@
 
 .email-details {
     width: 100%;
-    margin: 5px;
+    color: var(--main-div-color);
 }
 
 /* Controls */
 .email-controls {
     width: 100%;
     padding: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid var(--main-txt-color);
+    /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); */
 }
 
 .email-controls i {
     position: relative;
-    color: #737373;
+    color: var(--main-div-color);
     cursor: pointer;
     font-size: 24px;
     line-height: 1.2;
-    transition: all 0.2s;
+    transition: all 0.3s linear;
 }
 
 .email-controls i:hover {
-    color: #1c1c1c;
+    color: var(--main-txt-color);
 }
 
 /* Email Header */

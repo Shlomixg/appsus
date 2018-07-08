@@ -13,31 +13,52 @@ export default {
         emailDetails,
         emailStatus,
         emailCompose,
-        emailFilter
+        emailFilter,
     },
     template: `
-        <section class="email-app container flex" >
+        <section class="email-app container" >
+            
             <section class="email-list-wrapper" v-if="!selectedEmail">
-                <email-status :emails="emailsToShow"></email-status>
-                <email-filter @doFilter="setFilter"></email-filter>
+                <button class="btn btn-email-compose" @click="showModal = true">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <email-filter @doFilter="setFilter"
+                                :unread-count="unreadCount"
+                                :emails-count="emailsCount">
+                </email-filter>
                 <email-list :emails="emailsToShow" @select-email="selectEmail"></email-list>
+                <email-status :emails="emailsToShow"></email-status>
             </section>
-            <email-details v-if="selectedEmail" :selected-email="selectedEmail" @delete-email="deleteEmail" @return="deselectEmail" ></email-details>
-            <!-- <email-compose @send-email="sendEmail" ></email-compose> -->
+
+            <email-details v-if="selectedEmail" 
+                            :selected-email="selectedEmail"
+                            :mark-read="selectedEmail.isRead = true"
+                            @delete-email="deleteEmail"
+                            @return="deselectEmail" >
+            </email-details>
+            
+            <email-compose v-if="showModal" 
+                            :showModal="showModal"
+                            @toggle-modal="toggleModal"  
+                            @send-email="sendEmail" >
+            </email-compose>
+
         </section>
     `,
     data() {
         return {
             emails: null,
             selectedEmail: null,
-            filterBy: null
+            filterBy: null,
+            showModal: false,
+            newEmail: emailService.createEmail()
         }
     },
     created() {
         emailService.loadEmails()
             .then(emails => {
                 this.emails = emails;
-                console.log(this.emails);
+                console.log('load emails:', this.emails);
             });
     },
     mounted() {
@@ -66,7 +87,11 @@ export default {
             this.filterBy = filter;
         },
         sendEmail(email) {
-            emailService.sendEmail(email);
+            this.toggleModal();
+            emailService.sendEmail(email)
+        },
+        toggleModal() {
+            this.showModal = !this.showModal;
         }
     },
     watch: {
@@ -77,44 +102,27 @@ export default {
     },
     computed: {
         emailsToShow() {
-            console.log('To Show');
             if (!this.filterBy) return this.emails;
-
-            let emailsFiltered;
-
+            console.log('Emails To Show');
+            
             // Filtering
-            if (this.filterBy.emailStatus !== '') {
-                if (this.filterBy.emailStatus === 'read') {
-                    emailsFiltered = this.emails.filter(email => email.isRead);
-                } else {
-                    emailsFiltered = this.emails.filter(email => !email.isRead);
-                }
-            } else emailsFiltered = this.emails;
-
-            emailsFiltered = emailsFiltered.filter(email =>
-                (email.subject.toLowerCase().includes(this.filterBy.txt.toLowerCase()) ||
-                    email.body.toLowerCase().includes(this.filterBy.txt.toLowerCase()) ||
-                    email.senderName.toLowerCase().includes(this.filterBy.txt.toLowerCase()) ||
-                    email.senderMail.toLowerCase().includes(this.filterBy.txt.toLowerCase()))
-            )
-
+            var emailsFiltered = emailService.filterEmails(this.emails, emailsFiltered, this.filterBy);            
             // Sorting
-            switch (this.filterBy.sortBy) {
-                case 'date':
-                    emailsFiltered = emailsFiltered.sort((a, b) => {
-                        return a.sentAt - b.sentAt;
-                    });
-                    break;
-                case 'subject':
-                    emailsFiltered = emailsFiltered.sort((a, b) => {
-                        if (a.subject < b.subject) return -1;
-                        if (a.subject > b.subject) return 1;
-                        return 0;
-                    });
-                    break;
-            }
-            if (!this.filterBy.sortIsAsc) emailsFiltered.reverse();
+            emailService.sortEmails(emailsFiltered, this.filterBy);
+            
             return emailsFiltered;
-        }
+        },
+        emailsCount() {
+            if (!this.emailsToShow) return 0;
+            return this.emailsToShow.length;        
+        },
+        unreadCount() {
+            if (!this.emailsToShow) return 0;
+            let counter = 0;
+            this.emailsToShow.forEach(email => {
+                if (!email.isRead) counter++;
+            });
+            return counter;
+        },
     },
 }

@@ -1,8 +1,20 @@
 @import url('./email-list.css');
 @import url('./email-details.css');
+@import url('./email-compose.css');
+@import url('./email-filter.css');
 
 .email-app {
     width: 100%;
+}
+
+.btn.btn-email-compose {
+    z-index: 5000;
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    right: 10px;
+    bottom: 40px;
+    border-radius: 50%;
 }
 
 /* Status (Proggress Bar) */
@@ -30,9 +42,9 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    color: #fff;
+    color: var(--main-div-color);
     text-align: center;
-    background-color: #007bff;
+    background-color: var(--main-txt-color);
     transition: width .6s ease;
 }
 

@@ -38,7 +38,7 @@ body {
 
 /* Header */
 
-.app > header {
+header {
   position: fixed;
   top: 0;
   width: 100%;
@@ -198,13 +198,13 @@ main {
 
 footer {
   flex: 0 0 auto;
-  padding: 5px;
+  padding: 3px;
   color: var(--main-txt-color);
   background-color: var(--main-div-color);
 }
 
 footer span {
-  line-height: 40px;
+  line-height: 30px;
 }
 
 /* Buttons */

@@ -1,18 +1,32 @@
 import emailService from '../../services/email-service.js';
 
 export default {
-  props: [],
-  template: `
-        <section class="email-compose">
-            <form>
-                <label for="to">To</label>
-                <input type="text" id="to" v-model="newEmail.to" disabled />
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" v-model="newEmail.subject" />
-                <textarea id="body" v-model="newEmail.body" />
-                <button class="btn" @click.prevent="sendEmail" >Send</button>
-            </form>
-        </section>
+    comopenets: {
+    },
+    props: ['showModal'],
+    template: `
+        <transition name="modal">
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <section class="modal-container email-compose ">
+                        <div class="modal-header flex space-between align-items-center">
+                            New Message
+                            <i class="fas fa-times" @click="$emit('toggle-modal')" ></i>
+                        </div>
+                        <article class="modal-body">
+                            <span class="flex column">
+                                <input type="text" id="to" v-model="newEmail.to" disabled />
+                                <input type="text" id="subject" v-model="newEmail.subject" placeholder="To" />
+                                <textarea v-model="newEmail.body" placeholder="Content" />
+                            </span>
+                        </article>
+                        <div class="modal-footer">
+                            <button class="btn" @click="sendEmail">Send</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </transition>
     `,
     data() {
         return {

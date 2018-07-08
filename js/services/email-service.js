@@ -2,18 +2,24 @@ import utilsService, { saveToStorage } from './utils-service.js';
 
 var EMAILS_KEY = 'emailApp';
 var emails = [];
-var emailFilter = 'All'
+var emailsSortDefault = {
+    sortBy: '',
+    sortIsAsc: false,
+};
 
 function loadEmails() {
     emails = utilsService.loadFromStorage(EMAILS_KEY);
+    console.log('emails', emails);
+    
     if (!emails || emails.length === 0) {
         emails = [];
         addEmailsTest(); // emails for testing
     }
+    // emails = sortEmails(emails, emailsSortDefault);
     return Promise.resolve(emails);
 }
 
-function createEmail(subject = '', body = '', senderMail = '', senderName = '') {
+function createEmail(subject = '', body = '', senderMail = 'user@appsus.com', senderName = 'User Name') {
     return {
         id: utilsService.makeId(),
         subject,
@@ -22,7 +28,7 @@ function createEmail(subject = '', body = '', senderMail = '', senderName = '') 
         sentAt: '',
         senderMail,
         senderName,
-        to: 'tester@appsus.com'
+        to: 'user@appsus.com'
     }
 }
 
@@ -38,7 +44,6 @@ function getEmailById(id) {
 function removeEmail(id) {
     return new Promise((resolve, reject) => {
         var emailIdx = emails.findIndex(email => email.id === id);
-        console.log('idx', emailIdx);
         if (emailIdx !== -1) {
             emails.splice(emailIdx, 1);
             saveToStorage(EMAILS_KEY, emails);
@@ -52,24 +57,52 @@ function removeEmail(id) {
 function sendEmail(email) {
     email.sentAt = moment();
     emails.unshift(email);
-    emails = emails.sort((a, b) => {
-        return a.sentAt - b.sentAt;
-    });
-    saveToStorage(EMAILS_KEY, emails);
+    emails = sortEmails(emails, emailsSortDefault);
+    emails.reverse();
+    // saveToStorage(EMAILS_KEY, emails);
     return Promise.resolve(email);
 }
 
-// function getPrevEmailId(emailId) {
-//     var emailIdx = emails.findIndex(currEmail => currEmail.id === emailId);
-//     var prevEmail = (emailIdx === 0) ? emails[emails.length - 1] : emails[emailIdx - 1];
-//     return Promise.resolve(prevEmail.id)
-// }
+function filterEmails(emailsToFilter, emailsFiltered, filterBy) {
+    if (filterBy.emailStatus !== '') {
+        if (filterBy.emailStatus === 'read') {
+            emailsFiltered = emailsToFilter.filter(email => email.isRead);
+        } else {
+            emailsFiltered = emailsToFilter.filter(email => !email.isRead);
+        }
+    } else emailsFiltered = emailsToFilter;
 
-// function getNextEmailId(emailId) {
-//     var emailIdx = emails.findIndex(currEmail => currEmail.id === emailId);
-//     var nextEmail = (emailIdx < emails.length - 1) ? emails[emailIdx + 1] : emails[0];
-//     return Promise.resolve(nextEmail.id)
-// }
+    emailsFiltered = emailsFiltered.filter(email =>
+        (email.subject.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
+            email.body.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
+            email.senderName.toLowerCase().includes(filterBy.txt.toLowerCase()) ||
+            email.senderMail.toLowerCase().includes(filterBy.txt.toLowerCase()))
+    );
+    return emailsFiltered;
+}
+
+function sortEmails(emailsToSort, filterBy) {
+    switch (filterBy.sortBy) {
+        case 'date':
+            emailsToSort = emailsToSort.sort((a, b) => {
+                return a.sentAt - b.sentAt;
+            });
+            break;
+        case 'subject':
+            emailsToSort = emailsToSort.sort((a, b) => {
+                if (a.subject < b.subject) return -1;
+                if (a.subject > b.subject) return 1;
+                return 0;
+            });
+            break;
+    }
+    console.log('sortorder:', filterBy.sortIsAsc);
+    
+    if (!filterBy.sortIsAsc) emailsToSort.reverse();
+    console.log('sorted:', emailsToSort);
+    
+    return emailsToSort;
+}
 
 export default {
     loadEmails,
@@ -78,11 +111,14 @@ export default {
     getEmails,
     getEmailById,
     removeEmail,
+    filterEmails,
+    sortEmails
 }
 
 function addEmailsTest() {
     var temp = createEmail('It\'s coming home!', 'Football is coming home', 'Sus@app.net.il', 'Dudi Rooney');
     temp.isRead = true;
+    temp.sentAt = moment(temp.sentAt).add(-2, 'd');
     sendEmail(temp);
     temp.sentAt = moment(temp.sentAt).add(-45, 'm');
     sendEmail(createEmail('My First Email!', 'This is my first email. Yay!', 'Sus@mail.com', 'Puki Ben-Yaron'));
@@ -90,9 +126,7 @@ function addEmailsTest() {
     sendEmail(createEmail('Baba is here!', 'Hi Puki,\nbaba is here after his injury.\nCome to his office to pay a visit', 'Sus@met.com', 'Muki Ben-David'));
     temp = createEmail('Does Vue is the best JS Framework?', 'Probably the best framework in the world.\nFor sure.', 'Sus@straw.co.il', 'Horse');
     sendEmail(temp);
-    temp.sentAt = moment(temp.sentAt).add(30, 'd');
-    emails = emails.sort((a, b) => {
-        return a.sentAt - b.sentAt;
-    });
+    temp.sentAt = moment(temp.sentAt).add(2, 'd');
+    emails = sortEmails(emails, emailsSortDefault);
     saveToStorage(EMAILS_KEY, emails);
 }

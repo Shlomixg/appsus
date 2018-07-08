@@ -3,10 +3,13 @@ import { eventBus, DELETE_EMAIL } from '../../services/event-bus-service.js';
 export default {
     props: ['email'],
     template: `
-        <section :class="tobold" class="email-preview flex space-between align-items-center" @mouseover="showControls = true" @mouseleave="showControls = false" >
+        <section :class="tobold" 
+                class="email-preview flex align-items-center" 
+                @mouseover="showControls = true" 
+                @mouseleave="showControls = false">
             <span class="email-sender">{{email.senderName}}</span>
             <span class="email-content">
-                {{email.subject}} - <span class="email-body">{{email.body}}</span>
+                {{email.subject}}<span class="email-body"> - {{email.body}}</span>
             </span>
             <span v-show="!showControls">{{sentTime}}</span>
             <span v-show="showControls" class="email-preview-controls flex align-items-center">
@@ -34,7 +37,7 @@ export default {
             else return 'Mark as read';
         },
         tobold() {
-            if (this.email.isRead) return 'bold-weight';
+            if (!this.email.isRead) return 'bold-weight';
             else return 'light-weight';
         }
     },

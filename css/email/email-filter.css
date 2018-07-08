@@ -1,0 +1,48 @@
+.email-filter {
+    margin: 5px 0;
+    padding: 5px;
+    color: var(--main-div-color);
+    border-bottom: 2px solid var(--main-txt-color);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); */
+}
+
+.email-filter input {
+    font-size: 22px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.email-filter select {
+    font-size: 22px;
+    min-width: 100px;
+}
+
+.email-filter .search-wrapper {
+    flex: 1 1 200px;
+}
+
+.email-filter .radio-group {
+    flex: 0 1 115px;
+    text-align: right;
+}
+
+.email-filter input[type="radio"] {
+    display: none;
+}
+
+.filter-controls {
+    padding: 3px;
+}
+
+.filter-controls i {
+    margin: 0 3px;
+    font-size: 24px;
+    /* line-height: 1.2; */
+    color: #737373;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+
+.filter-controls i:hover {
+    color: var(--main-txt-color);
+}
